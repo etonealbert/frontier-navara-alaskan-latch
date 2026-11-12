@@ -1,0 +1,969 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "check": "CAD valid",
+      "value": true,
+      "passed": true,
+      "method": "OpenCascade BRepCheck through build123d is_valid"
+    },
+    {
+      "check": "Connected CAD solids",
+      "value": 1.0,
+      "expected": 1.0,
+      "tolerance": 0,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "Positive CAD volume",
+      "value": true,
+      "passed": true,
+      "method": "OpenCascade mass properties"
+    },
+    {
+      "check": "H1 crown to flange along Z",
+      "value": 33.500000000000014,
+      "expected": 33.5,
+      "tolerance": 1e-05,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "H2 flange extent along F",
+      "value": 16.50000010000001,
+      "expected": 16.5,
+      "tolerance": 1e-05,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "H3 crown above A",
+      "value": 11.3,
+      "expected": 11.3,
+      "tolerance": 1e-05,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "L1 S to free end along P",
+      "value": 30.0000001,
+      "expected": 30.0,
+      "tolerance": 1e-05,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "Flange width",
+      "value": 70.00000000000051,
+      "expected": 70.0,
+      "tolerance": 1e-05,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "Flange normal thickness",
+      "value": 3.200000200000003,
+      "expected": 3.2,
+      "tolerance": 1e-05,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "Ear spans on final body",
+      "value": 2.0,
+      "expected": 2.0,
+      "tolerance": 0,
+      "passed": true,
+      "method": "CAD line-solid intersection Y=0 Z=5"
+    },
+    {
+      "check": "Clear ear gap",
+      "value": 21.80000000000001,
+      "expected": 21.8,
+      "tolerance": 1e-05,
+      "passed": true,
+      "method": "Final body line intersection, not center spacing"
+    },
+    {
+      "check": "Ear 1 thickness",
+      "value": 3.0,
+      "expected": 3.0,
+      "tolerance": 1e-05,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "Ear 2 thickness",
+      "value": 3.0,
+      "expected": 3.0,
+      "tolerance": 1e-05,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "True cylindrical bore faces",
+      "value": 2.0,
+      "expected": 2.0,
+      "tolerance": 0,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "Bore 1 diameter",
+      "value": 2.5,
+      "expected": 2.5,
+      "tolerance": 1e-05,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "Bore 1 axis Y",
+      "value": 0.0,
+      "expected": 0.0,
+      "tolerance": 1e-05,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "Bore 1 axis Z",
+      "value": 7.15,
+      "expected": 7.15,
+      "tolerance": 1e-05,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "Bore 2 diameter",
+      "value": 2.5,
+      "expected": 2.5,
+      "tolerance": 1e-05,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "Bore 2 axis Y",
+      "value": 0.0,
+      "expected": 0.0,
+      "tolerance": 1e-05,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "Bore 2 axis Z",
+      "value": 7.15,
+      "expected": 7.15,
+      "tolerance": 1e-05,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "Pivot axis passes unobstructed",
+      "value": true,
+      "passed": true,
+      "method": "Final CAD intersection with full common bore axis is empty"
+    },
+    {
+      "check": "Alpha oriented rays",
+      "value": 110.0,
+      "expected": 110.0,
+      "tolerance": 1e-05,
+      "passed": true,
+      "method": "P toward free end vs -F toward ears"
+    },
+    {
+      "check": "Beta oriented rays",
+      "value": 110.0,
+      "expected": 110.0,
+      "tolerance": 1e-05,
+      "passed": true,
+      "method": "+Y toward horns vs descending neck"
+    },
+    {
+      "check": "Tooth parallel to paddle",
+      "value": 0.0,
+      "expected": 0.0,
+      "tolerance": 1e-05,
+      "passed": true,
+      "method": "Opposite projecting directions; straight longitudinal upper face"
+    },
+    {
+      "check": "A/P angle",
+      "value": 0.0,
+      "expected": 0.0,
+      "tolerance": 1e-05,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "Groove residual flange wall",
+      "value": 1.7000000000000028,
+      "expected": 1.7000000000000002,
+      "tolerance": 1e-05,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "Groove width",
+      "value": 2.5,
+      "expected": 2.5,
+      "tolerance": 1e-05,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "Groove overall length",
+      "value": 48.0,
+      "expected": 48.0,
+      "tolerance": 1e-05,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "Tooth nominal body width",
+      "value": 17.5,
+      "expected": 17.5,
+      "tolerance": 1e-05,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "Tooth projection from root datum",
+      "value": 10.000000000000002,
+      "expected": 10.0,
+      "tolerance": 1e-05,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "Tooth maximum thickness",
+      "value": 5.2,
+      "expected": 5.2,
+      "tolerance": 1e-05,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "Unmeasured retaining ledge absent",
+      "value": true,
+      "passed": true,
+      "method": "Default configuration; no guessed catch step"
+    },
+    {
+      "check": "Rib count",
+      "value": 3.0,
+      "expected": 3.0,
+      "tolerance": 0,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "Each rib adds joined material",
+      "value": true,
+      "passed": true,
+      "method": "Per-feature fuse validation; positive stage volume increments recorded"
+    },
+    {
+      "check": "Symmetry difference volume mm3",
+      "value": 0.0,
+      "expected": 0.0,
+      "tolerance": 0.001,
+      "passed": true,
+      "method": "Symmetric-difference BREP volume against B-plane mirror"
+    },
+    {
+      "check": "STEP round-trip valid",
+      "value": true,
+      "passed": true,
+      "method": "Reimport exported STEP with OpenCascade"
+    },
+    {
+      "check": "Exported BREP has no self-interference",
+      "value": true,
+      "passed": true,
+      "method": "BOPAlgo_CheckerSI level 5 on reimported STEP: completed without errors or interference pairs"
+    },
+    {
+      "check": "STEP symmetric-difference volume mm3",
+      "value": 0.0,
+      "expected": 0.0,
+      "tolerance": 0.001,
+      "passed": true,
+      "method": "Two BREP Boolean differences: source minus STEP and STEP minus source"
+    },
+    {
+      "check": "STEP solid count",
+      "value": 1.0,
+      "expected": 1.0,
+      "tolerance": 0,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "STEP volume difference mm3",
+      "value": 1.4347424439620227e-06,
+      "expected": 0.0,
+      "tolerance": 0.001,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "STEP bounds max error mm",
+      "value": 1.0000025696399462e-07,
+      "expected": 0.0,
+      "tolerance": 0.0001,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "STL watertight",
+      "value": true,
+      "passed": true,
+      "method": "trimesh edge incidence after duplicate vertex indexing; no hole filling"
+    },
+    {
+      "check": "STL winding consistent",
+      "value": true,
+      "passed": true,
+      "method": "trimesh shared-edge winding"
+    },
+    {
+      "check": "STL connected components",
+      "value": 1.0,
+      "expected": 1.0,
+      "tolerance": 0,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "STL Euler characteristic",
+      "value": -2.0,
+      "expected": -2.0,
+      "tolerance": 0,
+      "passed": true,
+      "method": "One closed shell with two pivot through-bores (genus 2)"
+    },
+    {
+      "check": "STL degenerate triangles",
+      "value": 0.0,
+      "expected": 0.0,
+      "tolerance": 0,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "STL positive volume",
+      "value": true,
+      "passed": true,
+      "method": "Signed triangle volume"
+    },
+    {
+      "check": "STL/CAD relative volume error",
+      "value": 0.0007704764950870616,
+      "expected": 0.0,
+      "tolerance": 0.0015,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "STL/CAD bounding error mm",
+      "value": 0.001295852661133523,
+      "expected": 0.0,
+      "tolerance": 0.02,
+      "passed": true,
+      "method": "CAD boundary measurement"
+    },
+    {
+      "check": "Input unchanged: cad-latch-spec.md",
+      "value": true,
+      "passed": true,
+      "method": "SHA256 vs INPUT_SHA256.md"
+    },
+    {
+      "check": "Input unchanged: cad-photo-atlas.pdf",
+      "value": true,
+      "passed": true,
+      "method": "SHA256 vs INPUT_SHA256.md"
+    }
+  ],
+  "cad": {
+    "volume_mm3": 10938.688064558122,
+    "bounds_mm": {
+      "min": [
+        -34.99999990000026,
+        -39.955524160837236,
+        -22.20000000000001
+      ],
+      "max": [
+        35.000000000000256,
+        7.249999999999999,
+        11.3
+      ],
+      "size": [
+        69.99999990000052,
+        47.205524160837236,
+        33.500000000000014
+      ]
+    },
+    "solids": 1
+  },
+  "step": {
+    "volume_mm3": 10938.68806312338,
+    "bytes": 755116
+  },
+  "stl": {
+    "volume_mm3": 10930.26006251729,
+    "triangles": 65934,
+    "vertices": 32965,
+    "bytes": 3296784
+  },
+  "stages": [
+    {
+      "stage": "platform",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 833.175
+    },
+    {
+      "stage": "horn_0",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 843.6204039839625
+    },
+    {
+      "stage": "horn_1",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 854.065807967925
+    },
+    {
+      "stage": "ear_0",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1137.8734784358178
+    },
+    {
+      "stage": "ear_1",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1421.6811489037104
+    },
+    {
+      "stage": "external ear root R0.5",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1422.804272689743
+    },
+    {
+      "stage": "coaxial through holes",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1393.3518415404644
+    },
+    {
+      "stage": "bore chamfers",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1392.6900126616445
+    },
+    {
+      "stage": "flange with blind recess",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 2568.1641125166384
+    },
+    {
+      "stage": "neck",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1931.4404497088321
+    },
+    {
+      "stage": "flange",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 4470.669852293642
+    },
+    {
+      "stage": "neck to 36 mm shoulder 0",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 4471.628808558986
+    },
+    {
+      "stage": "neck to 36 mm shoulder 1",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 4472.587764827438
+    },
+    {
+      "stage": "rib_0",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 4480.883959653415
+    },
+    {
+      "stage": "rib_1",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 4488.952513077697
+    },
+    {
+      "stage": "rib_2",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 4497.248707904408
+    },
+    {
+      "stage": "rib root fillets",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 4497.852035503121
+    },
+    {
+      "stage": "tapered rounded paddle",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 10401.979784653115
+    },
+    {
+      "stage": "straight reconstructed tooth",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 10937.171297141924
+    },
+    {
+      "stage": "analytic tooth lateral R1 blend 0",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 10937.929678267463
+    },
+    {
+      "stage": "analytic tooth lateral R1 blend 1",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 10938.688064558122
+    },
+    {
+      "stage": "final solid",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 10938.688064558122
+    }
+  ],
+  "datums": {
+    "A_z": 0.0,
+    "C": [
+      0,
+      0,
+      7.15
+    ],
+    "F": [
+      0.0,
+      -0.3420201433256687,
+      -0.9396926207859084
+    ],
+    "N": [
+      0.0,
+      0.9396926207859084,
+      -0.3420201433256687
+    ],
+    "P": [
+      0.0,
+      -1.0,
+      0.0
+    ],
+    "Q": [
+      0.0,
+      -0.0,
+      -1.0
+    ],
+    "neck_direction": [
+      0.0,
+      -0.3420201433256687,
+      -0.9396926207859084
+    ],
+    "flange_origin": [
+      0.0,
+      -7.083935294277109,
+      -6.2886958097672245
+    ],
+    "S": [
+      0.0,
+      -9.955524060837238,
+      -9.500234063589788
+    ],
+    "tooth_root": [
+      0.0,
+      -11.052749394230354,
+      -21.871009971662833
+    ],
+    "tooth_direction": [
+      -0.0,
+      1.0,
+      -0.0
+    ],
+    "tooth_upper_root": [
+      0.0,
+      -9.1601041760461,
+      -16.671009971662833
+    ],
+    "neck_length": 5.362068083021797,
+    "flange_xscale": 1.0393063147474804,
+    "flange_min_z": -22.20000000000001
+  },
+  "parameters": [
+    {
+      "name": "h1",
+      "value": 33.5,
+      "status": "У",
+      "source": "§3 crown to lowest flange surface along H=Z"
+    },
+    {
+      "name": "h2",
+      "value": 16.5,
+      "status": "У",
+      "source": "§3 flange extent along F"
+    },
+    {
+      "name": "h3",
+      "value": 11.3,
+      "status": "У",
+      "source": "§3 ear crown above A"
+    },
+    {
+      "name": "paddle_length",
+      "value": 30.0,
+      "status": "У/Д",
+      "source": "§3 S to free end along P"
+    },
+    {
+      "name": "alpha",
+      "value": 110.0,
+      "status": "О",
+      "source": "§10 paddle forward ray to flange upward ray"
+    },
+    {
+      "name": "beta",
+      "value": 110.0,
+      "status": "О",
+      "source": "§10 platform horn ray to descending neck ray"
+    },
+    {
+      "name": "delta",
+      "value": 0.0,
+      "status": "Д",
+      "source": "§12 signed A/P angle"
+    },
+    {
+      "name": "gamma",
+      "value": 0.0,
+      "status": "У/Д",
+      "source": "§12 tooth straight face relative to P"
+    },
+    {
+      "name": "ear_thickness",
+      "value": 3.0,
+      "status": "И",
+      "source": "§4 along X"
+    },
+    {
+      "name": "ear_gap",
+      "value": 21.8,
+      "status": "И",
+      "source": "§4 clear planar gap"
+    },
+    {
+      "name": "hole_diameter",
+      "value": 2.5,
+      "status": "И",
+      "source": "§4 true coaxial through bores"
+    },
+    {
+      "name": "crown_hole_land",
+      "value": 2.9,
+      "status": "И",
+      "source": "§4 crown to upper bore edge"
+    },
+    {
+      "name": "ear_crown_radius",
+      "value": 4.15,
+      "status": "Д",
+      "source": "§12 concentric crown approximation"
+    },
+    {
+      "name": "hole_chamfer",
+      "value": 0.2,
+      "status": "Д",
+      "source": "§12 45 degree bore chamfer"
+    },
+    {
+      "name": "ear_root_radius",
+      "value": 0.5,
+      "status": "Д",
+      "source": "§12 OUTSIDE roots only to preserve clear gap"
+    },
+    {
+      "name": "platform_length",
+      "value": 10.5,
+      "status": "И/Д",
+      "source": "§5; ear bases flush at both ends"
+    },
+    {
+      "name": "platform_horn_width",
+      "value": 30.8,
+      "status": "И",
+      "source": "§5 horn-side width"
+    },
+    {
+      "name": "platform_neck_width",
+      "value": 32.68,
+      "status": "И",
+      "source": "§5 neck-side width"
+    },
+    {
+      "name": "platform_thickness",
+      "value": 2.5,
+      "status": "И",
+      "source": "§5 below A"
+    },
+    {
+      "name": "horn_spacing",
+      "value": 18.0,
+      "status": "И",
+      "source": "§5 center to center along X"
+    },
+    {
+      "name": "horn_length",
+      "value": 2.0,
+      "status": "И/Д",
+      "source": "§12 extends beyond platform in +Y"
+    },
+    {
+      "name": "horn_width",
+      "value": 2.2,
+      "status": "О",
+      "source": "§12"
+    },
+    {
+      "name": "horn_radius",
+      "value": 0.4,
+      "status": "Д",
+      "source": "§12 open edges"
+    },
+    {
+      "name": "neck_width",
+      "value": 34.0,
+      "status": "И",
+      "source": "§6 at flange"
+    },
+    {
+      "name": "neck_thickness",
+      "value": 3.0,
+      "status": "И",
+      "source": "§6 normal to neck"
+    },
+    {
+      "name": "neck_reference_length",
+      "value": 5.1,
+      "status": "И/Д",
+      "source": "§10 reference only; solve actual length from H1"
+    },
+    {
+      "name": "rib_thickness",
+      "value": 2.0,
+      "status": "О",
+      "source": "§6 three ribs"
+    },
+    {
+      "name": "rib_leg",
+      "value": 4.5,
+      "status": "О",
+      "source": "§6 side-profile legs, not perpendicular"
+    },
+    {
+      "name": "rib_radius",
+      "value": 0.5,
+      "status": "Д",
+      "source": "§12 rib roots"
+    },
+    {
+      "name": "flange_width",
+      "value": 70.0,
+      "status": "И",
+      "source": "§7 finished tip-to-tip extent"
+    },
+    {
+      "name": "flange_thickness",
+      "value": 3.2,
+      "status": "И",
+      "source": "§7 along rear normal N"
+    },
+    {
+      "name": "flange_junction_width",
+      "value": 36.0,
+      "status": "И/Д",
+      "source": "§12 central transition at V=0"
+    },
+    {
+      "name": "flange_edge_radius",
+      "value": 0.5,
+      "status": "Д",
+      "source": "§12 perimeter front/rear rounds"
+    },
+    {
+      "name": "wing_radius",
+      "value": 1.0,
+      "status": "Д",
+      "source": "§12 planar tip rounds"
+    },
+    {
+      "name": "groove_length",
+      "value": 48.0,
+      "status": "О",
+      "source": "§12 capsule overall length"
+    },
+    {
+      "name": "groove_width",
+      "value": 2.5,
+      "status": "О",
+      "source": "§12 capsule width"
+    },
+    {
+      "name": "groove_depth",
+      "value": 1.5,
+      "status": "О",
+      "source": "§12 from rear surface along N"
+    },
+    {
+      "name": "groove_v",
+      "value": 5.0,
+      "status": "Д",
+      "source": "§12 center from wing-tip baseline"
+    },
+    {
+      "name": "paddle_root_width",
+      "value": 52.0,
+      "status": "И",
+      "source": "§8 at S"
+    },
+    {
+      "name": "paddle_end_width",
+      "value": 40.0,
+      "status": "И/Д",
+      "source": "§12 unrounded trapezoid width"
+    },
+    {
+      "name": "paddle_corner_radius",
+      "value": 10.0,
+      "status": "И/Д",
+      "source": "§12 two plan-view end corners"
+    },
+    {
+      "name": "paddle_root_thickness",
+      "value": 6.0,
+      "status": "И",
+      "source": "§8 local root envelope"
+    },
+    {
+      "name": "paddle_end_thickness",
+      "value": 3.0,
+      "status": "Д",
+      "source": "§12 free-end envelope"
+    },
+    {
+      "name": "paddle_end_radius",
+      "value": 1.5,
+      "status": "Д",
+      "source": "§12 rounded free-end side profile"
+    },
+    {
+      "name": "paddle_s_v",
+      "value": 4.0,
+      "status": "Д",
+      "source": "Photo side view: S on FRONT flange surface at V=4"
+    },
+    {
+      "name": "tooth_width",
+      "value": 17.5,
+      "status": "И",
+      "source": "§9"
+    },
+    {
+      "name": "tooth_length",
+      "value": 10.0,
+      "status": "И/Д",
+      "source": "§12 from rear root lower datum to end"
+    },
+    {
+      "name": "tooth_root_thickness",
+      "value": 5.2,
+      "status": "И/Д",
+      "source": "§12 maximum envelope"
+    },
+    {
+      "name": "tooth_end_thickness",
+      "value": 2.0,
+      "status": "И",
+      "source": "§12 pre-rounding end envelope"
+    },
+    {
+      "name": "tooth_edge_offset",
+      "value": 0.5,
+      "status": "Д",
+      "source": "§12 lower root boundary setback along F"
+    },
+    {
+      "name": "tooth_root_radius",
+      "value": 1.0,
+      "status": "Д",
+      "source": "§12 lateral noncontact root blends"
+    },
+    {
+      "name": "tooth_tip_radius",
+      "value": 0.3,
+      "status": "Д",
+      "source": "§12 free-end rounds"
+    },
+    {
+      "name": "retaining_face_from_root",
+      "value": null,
+      "status": "?",
+      "source": "§9 unknown; no retaining ledge in V01"
+    },
+    {
+      "name": "retaining_ledge_depth",
+      "value": 0.0,
+      "status": "?/Д",
+      "source": "Disabled. Set only after mating-part measurement"
+    },
+    {
+      "name": "retaining_face_angle",
+      "value": 90.0,
+      "status": "?/Д",
+      "source": "Editing default only; unused when ledge disabled"
+    },
+    {
+      "name": "fusion_overlap",
+      "value": 0.3,
+      "status": "Д",
+      "source": "CAD overlap inside mating material; no external fit allowance"
+    },
+    {
+      "name": "stl_linear_tolerance",
+      "value": 0.01,
+      "status": "Д",
+      "source": "Export chordal deflection mm"
+    },
+    {
+      "name": "stl_angular_tolerance",
+      "value": 0.1,
+      "status": "Д",
+      "source": "Export angular deflection radians"
+    }
+  ],
+  "raw_self_interference_diagnostic": {
+    "errors": "BOPAlgo_AlertIntersectionFailed",
+    "pairs": 0
+  }
+}
