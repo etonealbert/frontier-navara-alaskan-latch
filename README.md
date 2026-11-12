@@ -32,6 +32,15 @@
 
 В ТЗ упоминаются 10 оригинальных фотографий, но в данном пакете представлены **два присланных файла**, а фотографии включены в PDF-альбом. Отдельные оригинальные JPG/JPEG не добавлены; **не утверждать обратного**.
 
+## Результат V01
+
+Предварительная модель для примерки (удерживающая грань зуба не задана — см. отчёты).
+
+- `output/armrest_latch_v01.step`, `output/armrest_latch_v01.stl` — модель в мм; виды `output/armrest_latch_v01_*.png` и чертёж-схема `output/armrest_latch_v01_drawing.{png,svg}`.
+- `src/params.py` — все параметры со статусами У/И/О/Д/Р/?; `src/model.py` — построение и экспорт; `src/validate.py` — проверки; `src/run_all.py` — полный цикл одной командой.
+- Отчёты: `reports/validation.md`, `reports/assumptions.md`, `reports/parameters.md`, `reports/print_handoff.md`, `reports/environment.md`.
+- Пересборка: `.venv/bin/python src/run_all.py` (Windows: `.\.venv\Scripts\python.exe src\run_all.py`); зависимости — `requirements.txt`.
+
 ## Ссылки
 
 - Официальный репозиторий: https://github.com/gumyr/build123d

@@ -1,0 +1,11 @@
+# Прямые зависимости V01 (версии, на которых модель построена и проверена).
+# Установка через корпоративный прокси (прямой pypi.org закрыт политикой сети):
+#   .venv/bin/python -m pip install --index-url https://nexus-dev.onefiserv.net/repository/pypi-proxy/simple -r requirements.txt
+build123d==0.13.0
+cadquery-ocp-novtk==8.0.1.1.0
+numpy==2.5.4
+trimesh==4.7.0
+manifold3d==3.5.4
+matplotlib==3.11.2
+pypdfium2==5.15.2
+pillow==13.0.0
