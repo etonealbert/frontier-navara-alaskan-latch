@@ -106,6 +106,11 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def dec(v) -> str:
+    """Число для подписи с десятичной запятой: 3.1 → «3,1»."""
+    return f"{v:g}".replace(".", ",")
+
+
 # --- Проверки -----------------------------------------------------------------------------
 def run(do_variants: bool = True) -> dict:
     t_start = time.time()
@@ -125,7 +130,7 @@ def run(do_variants: bool = True) -> dict:
     # 1. Перестроение из исходника
     solid, info, c = M.build()
     d = M.directions(c)
-    der = p.derived()
+    der = p.derived(c)
     results["build_info"] = {k: v for k, v in info.items()}
     check("Построение", "build123d-скрипт выполнен без ошибок", "model.build() в этом процессе", True, True,
           note=f"{info['build_seconds']} с")
@@ -220,9 +225,10 @@ def run(do_variants: bool = True) -> dict:
           note=f"S=(Y {s_pt[0]:.3f}; Z {s_pt[1]:.3f}); крайняя точка X={tip_pt.X:.3f}")
 
     # 4. Проушины и отверстия
-    hz = der["LUG_HOLE_Z"]
-    iv = intervals(solid, (-50, 0, hz + 2.65), (1, 0, 0))
-    check("Проушины", "Сечение по X над отверстием: два интервала", "прямая вдоль X при Y=0, Z=9,8",
+    hz, dia = der["LUG_HOLE_Z"], c.LUG_HOLE_D
+    z_above = hz + (der["LUG_TOP_RADIUS"] + dia / 2) / 2  # середина перемычки над отверстием
+    iv = intervals(solid, (-50, 0, z_above), (1, 0, 0))
+    check("Проушины", "Сечение по X над отверстием: два интервала", f"прямая вдоль X при Y=0, Z={z_above:.2f}",
           len(iv), 2, 0, unit="шт", note=str([(round(a - 50, 3), round(b - 50, 3)) for a, b in iv]))
     if len(iv) == 2:
         (a0, a1), (b0, b1) = [(a - 50, b - 50) for a, b in iv]
@@ -234,7 +240,7 @@ def run(do_variants: bool = True) -> dict:
         check("Проушины", "Средние плоскости ±12,4 (Р)", "(a0+a1)/2, (b0+b1)/2", (b0 + b1) / 2,
               der["LUG_MID_X"], 0.002, note=f"−X: {(a0 + a1) / 2:.3f}")
     through = intervals(solid, (-50, 0, hz), (1, 0, 0))
-    check("Проушины", "Отверстия сквозные по оси C", "прямая вдоль X по оси Y=0, Z=7,15 не пересекает тело",
+    check("Проушины", "Отверстия сквозные по оси C", f"прямая вдоль X по оси Y=0, Z={hz:.2f} не пересекает тело",
           len(through), 0, 0, unit="интервалов")
     cyl = []
     for f in solid.faces():
@@ -245,24 +251,43 @@ def run(do_variants: bool = True) -> dict:
             dirv = Vector(ax.Direction().X(), ax.Direction().Y(), ax.Direction().Z())
             if abs(abs(dirv.X) - 1) < 1e-9:
                 loc = ax.Location()
-                cyl.append((cy.Radius(), loc.Y(), loc.Z(), f.center().X))
-    holes = [q for q in cyl if abs(q[0] - c.LUG_HOLE_D / 2) < 1e-6]
-    sides = {round(np.sign(q[3])) for q in holes}
-    check("Проушины", "Диаметр отверстий Ø2,5 (обе проушины)", "цилиндрические грани с осью ∥X, радиус×2",
-          2 * holes[0][0] if holes else float("nan"), c.LUG_HOLE_D, 1e-6,
-          note=f"граней-цилиндров Ø2,5: {len(holes)}, по сторонам X: {sorted(sides)}")
-    coax = max(math.hypot(q[1], q[2] - hz) for q in holes) if holes else float("nan")
-    check("Проушины", "Соосность отверстий (отклонение осей от C)", "расстояние осей цилиндров до линии Y=0, Z=7,15",
-          coax, 0.0, 1e-6)
-    check("Проушины", "Центр отверстия над A = 7,15 (Р)", "Z оси цилиндров − Z(A)", holes[0][2] - z_a, hz, 1e-6)
-    check("Проушины", "Перемычка над отверстием 2,9", "Z макушки − (Z оси + R)",
-          z_top_pt.Z - (holes[0][2] + holes[0][0]), c.LUG_TOP_TO_HOLE_EDGE, 0.002)
+                q = f.position_at(0.5, 0.5)
+                concave = f.normal_at(q).dot(Vector(0, q.Y - loc.Y(), q.Z - loc.Z())) < 0
+                cyl.append((cy.Radius(), loc.Y(), loc.Z(), f.center().X, concave))
+    # Отбор по положению (в пределах толщины проушин) и вогнутости (нормаль к оси — отверстие, а не выпуклая
+    # дуга вершины ушка), а не по ожидаемому радиусу — иначе проверка диаметра была бы круговой.
+    holes = [q for q in cyl if q[4] and der["LUG_INNER_X"] - 1e-6 <= abs(q[3]) <= der["LUG_OUTER_X"] + 1e-6]
+    sides = sorted({int(np.sign(q[3])) for q in holes})
+    check("Проушины", "Отверстия: по одной цилиндрической грани в каждой проушине",
+          "вогнутые грани-цилиндры с осью ∥X в пределах толщин проушин", len(holes), 2, 0, unit="шт",
+          note=f"стороны X: {sides}; выпуклых дуг вершины ушка: "
+               f"{sum(1 for q in cyl if not q[4] and der['LUG_INNER_X'] - 1e-6 <= abs(q[3]) <= der['LUG_OUTER_X'] + 1e-6)}")
+    if len(holes) == 2 and sides == [-1, 1]:
+        d_faces = max((2 * q[0] for q in holes), key=lambda v: abs(v - dia))
+        check("Проушины", f"Диаметр отверстий Ø{dec(dia)} (грани-цилиндры, обе проушины)", "2 × радиус граней",
+              d_faces, dia, 1e-6, note="исправленный замер владельца (ранее Ø2,5)")
+        coax = max(math.hypot(q[1], q[2] - hz) for q in holes)
+        check("Проушины", "Соосность отверстий (отклонение осей от C)",
+              f"расстояние осей цилиндров до линии Y=0, Z={hz:.2f}", coax, 0.0, 1e-6)
+        check("Проушины", f"Центр отверстия над A = {dec(round(hz, 3))} (Р)", "Z оси цилиндров − Z(A)",
+              holes[0][2] - z_a, hz, 1e-6, note="H3 − (перемычка + Ø/2)" if c.LUG_HOLE_CENTER_Z_FIXED is None
+              else "задан LUG_HOLE_CENTER_Z_FIXED")
+        check("Проушины", f"Перемычка над отверстием {dec(round(der['LUG_BRIDGE'], 3))}", "Z макушки − (Z оси + R)",
+              z_top_pt.Z - (holes[0][2] + holes[0][0]), der["LUG_BRIDGE"], 0.002)
+    gaps = []
+    for sx in (-1, 1):
+        xm = sx * der["LUG_MID_X"]
+        for origin_, direction_ in (((xm, 0, 50), (0, 0, -1)), ((xm, -50, hz), (0, 1, 0))):
+            ivh = intervals(solid, origin_, direction_)
+            gaps.append(ivh[1][0] - ivh[0][1] if len(ivh) >= 2 else float("nan"))
+    check("Проушины", f"Диаметр отверстий Ø{dec(dia)} (лучи в средних плоскостях проушин)",
+          "просвет между интервалами тела вдоль Z и вдоль Y через ось C, X = ±12,4", max(gaps, key=lambda v: abs(v - dia)),
+          dia, 0.002, note="; ".join(f"{g:.4f}" for g in gaps))
     iv = intervals(solid, (der["LUG_MID_X"], -50, 0.05), (0, 1, 0))
-    lp = M.lug_profile_points(c, der)
     flare = math.tan(math.radians(info["lug_side_flare_deg"]))
     check("Проушины", "Основание ушка вдоль Y (у A, Z=0,05)", "прямая вдоль Y в средней плоскости проушины",
           iv[0][1] - iv[0][0] if iv else float("nan"), c.LUG_BASE_LENGTH - 2 * 0.05 * flare, 0.002,
-          note=f"Д: касательные к дуге R{c.LUG_TOP_RADIUS}, развал боковин {info['lug_side_flare_deg']:.2f}°")
+          note=f"Д: касательные к дуге R{der['LUG_TOP_RADIUS']:.2f}, развал боковин {info['lug_side_flare_deg']:.2f}°")
 
     # 5. Площадка и рожки
     y_f, y_b = der["PAD_FRONT_Y"], der["PAD_BACK_Y"]
@@ -544,7 +569,8 @@ def run(do_variants: bool = True) -> dict:
                          "прямая грань зуба снизу": {"TOOTH_FLAT_FACE": "bottom"},
                          "контур фланца по исходной таблице §12.1 (S поднята до 2,5)":
                              {"FLANGE_CONTOUR_SOURCE": "spec", "PADDLE_S_V": 2.5},
-                         "γ = 3°": {"GAMMA_DEG": 3.0}}.items():
+                         "γ = 3°": {"GAMMA_DEG": 3.0},
+                         "центр C зафиксирован на 7,15 (как до исправления Ø)": {"LUG_HOLE_CENTER_Z_FIXED": 7.15}}.items():
             try:
                 sv, iv_info, _ = M.build(ov)
                 ok = sv.is_valid and len(sv.solids()) == 1
@@ -556,6 +582,14 @@ def run(do_variants: bool = True) -> dict:
                     drop = ivs[0][0] - 5.0 if ivs else float("nan")
                     ok = ok and abs(drop - c.TOOTH_STEP_DEPTH) < 0.002
                     note += f"; прямая грань за стенкой понижена на {drop:.3f} (задано {c.TOOTH_STEP_DEPTH})"
+                if ov.get("LUG_HOLE_CENTER_Z_FIXED") is not None:
+                    ivs = intervals(sv, (der["LUG_MID_X"], 0, 50), (0, 0, -1))
+                    bridge_v = ivs[0][1] - ivs[0][0] if ivs else float("nan")
+                    gap_v = ivs[1][0] - ivs[0][1] if len(ivs) >= 2 else float("nan")
+                    bridge_exp = c.H3_LUG - ov["LUG_HOLE_CENTER_Z_FIXED"] - c.LUG_HOLE_D / 2
+                    ok = ok and abs(bridge_v - bridge_exp) < 0.002 and abs(gap_v - c.LUG_HOLE_D) < 0.002
+                    note += (f"; перемычка {bridge_v:.3f} (ожидается {bridge_exp:.3f}), Ø по лучу {gap_v:.3f}, "
+                             f"центр Z={iv_info['lug_hole_center_z']:.2f}")
                 check("Варианты", f"Перестроение: {name}", f"model.build({ov})", ok, True, note=note)
             except Exception as exc:  # noqa: BLE001 — вариант фиксируется как FAIL с текстом ошибки
                 variants[name] = dict(ok=False, error=str(exc), overrides=ov)
@@ -603,7 +637,8 @@ ACCEPTANCE = [
     ("H2 = 16,5 вдоль F фланца, а не по общему габариту", [("Главные размеры", "H2 = 16,5")], ""),
     ("H3 = 11,3 от A до вершины ушка", [("Главные размеры", "H3 = 11,3")], ""),
     ("L1 = 30,0 от S до края лопатки вдоль P", [("Главные размеры", "L1 = 30,0")], ""),
-    ("Ø2,5 у обеих проушин; соосность; две толщины 3,0; внутренний зазор 21,8",
+    ("Ø у обеих проушин (по исправленному замеру владельца " + dec(p.LUG_HOLE_D) + "; в ТЗ — Ø2,5); соосность; "
+     "две толщины 3,0; внутренний зазор 21,8",
      [("Проушины", "Диаметр отверстий"), ("Проушины", "Соосность"), ("Проушины", "Толщина проушины (−X)"),
       ("Проушины", "Толщина проушины (+X)"), ("Проушины", "Чистый зазор")], ""),
     ("Ширина фланца 70; непрерывная симметричная кромка без ложного общего R27",
@@ -715,10 +750,16 @@ def write_parameters(results: dict):
         val = prm.value
         if isinstance(val, tuple):
             val = "; ".join(f"({x:g}, {v:g})" for x, v in val)
+        elif val is None:
+            val = "не задано"
         lines.append(f"| `{name}` | {val} | {prm.status} | {prm.source} | {prm.description} |")
     lines += ["", "## Расчётные величины (Р)", "", "| Величина | Значение, мм/° | Как получена |", "|---|---:|---|"]
+    hz = der["LUG_HOLE_Z"]
     rows = [
-        ("Центр отверстия над A", der["LUG_HOLE_Z"], "H3 − (2,9 + Ø/2)"),
+        ("Центр отверстия C над A", hz, "H3 − (перемычка 2,9 + Ø/2)" if p.LUG_HOLE_CENTER_Z_FIXED is None
+         else "задан LUG_HOLE_CENTER_Z_FIXED"),
+        ("Радиус дуги вершины ушка", der["LUG_TOP_RADIUS"], "H3 − Z_C (дуга с центром в отверстии через макушку, Д)"),
+        ("Перемычка над отверстием", der["LUG_BRIDGE"], "R − Ø/2"),
         ("Внутренние грани проушин X", der["LUG_INNER_X"], "±зазор/2"),
         ("Средние плоскости проушин X", der["LUG_MID_X"], "±(зазор + толщина)/2"),
         ("Наружный размах проушин", der["LUG_OUTER_SPAN"], "зазор + 2·толщина"),
@@ -729,11 +770,12 @@ def write_parameters(results: dict):
         ("Длина шейки по тыльной грани", info["neck_length_back_face"], "от низа площадки до прямой V=0"),
         ("Радиус вогнутого перехода шейки", info["neck_junction_fillet_radius"], "ширина сопряжения 36 при V=0"),
         ("X острого кончика до скругления R1", info["flange_tip_x_before_rounding"], "итерация: габарит 70,000 после R1"),
-        ("Развал боковин проушины", info["lug_side_flare_deg"], "касательные от углов основания к R4,15"),
+        ("Развал боковин проушины", info["lug_side_flare_deg"],
+         f"касательные от углов основания к дуге R{dec(round(der['LUG_TOP_RADIUS'], 3))}"),
         ("S: Y", info["S_point_YZ"][0], "лицевая плоскость фланца на V = PADDLE_S_V"),
         ("S: Z (= плоскость P)", info["S_point_YZ"][1], "то же"),
         ("Корень прямой грани зуба T0: Y", info["tooth_flat_root_YZ"][0], "от оси C (Y=0)"),
-        ("Корень прямой грани зуба T0: Z", info["tooth_flat_root_YZ"][1], "Z оси C = 7,15"),
+        ("Корень прямой грани зуба T0: Z", info["tooth_flat_root_YZ"][1], f"Z оси C = {dec(round(hz, 3))}"),
         ("Нижняя линия корня зуба R0: Y", info["tooth_lower_root_R0_YZ"][0], "0,5 вдоль F от выпуклой кромки"),
         ("Нижняя линия корня зуба R0: Z", info["tooth_lower_root_R0_YZ"][1], ""),
         ("Конец зуба: Y", info["tooth_tip_flat_YZ"][0], "T0 + 10 вдоль P"),

@@ -30,8 +30,12 @@ ATLAS = min((ROOT / "input").glob("cad-photo-atlas*.pdf"))
 PAGES = {"IMG_6558": 2, "IMG_6559": 3, "IMG_4391": 4, "IMG_6560": 5, "IMG_6561": 6, "IMG_4397": 7,
          "IMG_4393": 8, "IMG_4394": 9, "IMG_4395": 10, "IMG_4396": 11}
 # Привязка бокового кадра IMG_4396 (1170×1490 px, система координат ТЗ §10.1), измерено по снимку:
-C_PHOTO = (795.0, 497.0)        # центр видимого отверстия
-PX_PER_MM = 762.0 / 33.5        # макушка y≈398 → низ фланца y≈1160 по H1
+# столбец оси C — центр окружности, вписанной в обод отверстия (±2 px); макушка и низ фланца — по силуэту.
+# Высота центра отверстия под фото НЕ подгоняется: модель ставится по макушке и масштабу H1.
+X_C_PHOTO = 776.0
+Y_TOP_PHOTO = 399.0
+Y_BOTTOM_PHOTO = 1164.0
+PX_PER_MM = (Y_BOTTOM_PHOTO - Y_TOP_PHOTO) / M.p.H1_OVERALL  # 765 px = 33,5 мм
 ROLL_DEG = math.degrees(math.atan2(711 - 695, 891 - 680))  # наклон площадки A на снимке (ТЗ §10.1)
 
 
@@ -54,8 +58,9 @@ def side_overlay(verts, tris):
     if ph.size != (1170, 1490):
         raise RuntimeError(f"unexpected IMG_4396 size {ph.size}")
     W, H = 1800, 2000
-    _, info = R.render(verts, tris, (-1, 0, 0), (0, 0, 1), size=(W, H), scale=PX_PER_MM,
-                       center=(0.0, M.p.derived()["LUG_HOLE_Z"]))
+    hz = M.p.derived()["LUG_HOLE_Z"]
+    anchor = (X_C_PHOTO, Y_TOP_PHOTO + (M.p.H3_LUG - hz) * PX_PER_MM)  # куда на фото попадает ось C модели
+    _, info = R.render(verts, tris, (-1, 0, 0), (0, 0, 1), size=(W, H), scale=PX_PER_MM, center=(0.0, hz))
     mask, edge = info["mask"], info["edge"]
     ov = np.zeros((H, W, 4), np.uint8)
     ov[mask] = (0, 170, 255, 60)
@@ -65,15 +70,16 @@ def side_overlay(verts, tris):
     ov[thick] = (0, 255, 120, 255)
     layer = Image.fromarray(ov, "RGBA").rotate(ROLL_DEG, center=(W / 2, H / 2), resample=Image.BICUBIC)
     canvas = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    canvas.paste(ph.convert("RGBA"), (int(round(W / 2 - C_PHOTO[0])), int(round(H / 2 - C_PHOTO[1]))))
+    x0 = int(round(W / 2 - anchor[0]))
+    y0 = int(round(H / 2 - anchor[1]))
+    canvas.paste(ph.convert("RGBA"), (x0, y0))
     canvas.alpha_composite(layer)
-    x0 = int(round(W / 2 - C_PHOTO[0]))
-    y0 = int(round(H / 2 - C_PHOTO[1]))
     out = canvas.crop((x0 + 150, y0 + 300, x0 + 1150, y0 + 1300)).convert("RGB")
     d = ImageDraw.Draw(out)
     d.rectangle([0, 0, 1000, 92], fill=(255, 255, 255))
-    d.text((10, 6), "IMG_4396 + контур V01 (зелёный) в масштабе H1: 33,5 мм = 762 px; совмещено по оси C,", fill=(0, 0, 0), font=font(19))
-    d.text((10, 32), f"поворот кадра {ROLL_DEG:.1f}° по площадке A. Фото перспективное: ближняя проушина крупнее,", fill=(0, 0, 0), font=font(19))
+    d.text((10, 6), f"IMG_4396 + контур V01 (зелёный), масштаб H1: 33,5 мм = {Y_BOTTOM_PHOTO - Y_TOP_PHOTO:.0f} px; привязка по макушке "
+                    "и столбцу оси C,", fill=(0, 0, 0), font=font(19))
+    d.text((10, 32), f"поворот кадра {ROLL_DEG:.1f}° по площадке A. Фото перспективное: ближняя проушина крупнее;", fill=(0, 0, 0), font=font(19))
     d.text((10, 58), "зуб на фото сломан (виден остаток) — V01 показывает восстановленный клин 10 мм.", fill=(0, 0, 0), font=font(19))
     return out
 

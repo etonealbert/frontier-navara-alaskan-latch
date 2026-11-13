@@ -200,9 +200,9 @@ def make_pad(c):
 def lug_profile_points(c, der):
     """Опорные точки профиля проушины в (Y, Z): углы основания, точки касания, макушка."""
     center = (0.0, der["LUG_HOLE_Z"])
-    r = c.LUG_TOP_RADIUS
-    if abs(center[1] + r - c.H3_LUG) > 1e-9:
-        raise ValueError("LUG_TOP_RADIUS must equal H3_LUG - LUG_HOLE_Z (arc concentric with the hole)")
+    r = der["LUG_TOP_RADIUS"]
+    if r >= c.LUG_BASE_LENGTH / 2.0:
+        raise ValueError(f"lug top arc R{r:.3f} is not narrower than the lug base {c.LUG_BASE_LENGTH}")
     y_f = -c.LUG_HOLE_FROM_FRONT_END
     y_b = y_f + c.LUG_BASE_LENGTH
 
@@ -396,7 +396,7 @@ def apply_fillet(solid: Solid, radius: float, edges, label: str, log: list) -> S
 def build(overrides: dict | None = None):
     t0 = time.time()
     c = config(overrides)
-    der = p.derived()
+    der = p.derived(c)
     d = directions(c)
     z_target = c.H3_LUG - c.H1_OVERALL
 
@@ -514,6 +514,10 @@ def build(overrides: dict | None = None):
         "flange_plate_zmin": plate_zmin,
         "flange_tip_x_before_rounding": pinfo["x_tip_sharp"],
         "neck_junction_fillet_radius": pinfo["r_junction"],
+        "lug_hole_d": c.LUG_HOLE_D,
+        "lug_hole_center_z": der["LUG_HOLE_Z"],
+        "lug_top_radius": der["LUG_TOP_RADIUS"],
+        "lug_bridge_above_hole": der["LUG_BRIDGE"],
         "lug_tangent_point_front_YZ": list(lp["t_front"]),
         "lug_tangent_point_back_YZ": list(lp["t_back"]),
         "lug_side_flare_deg": math.degrees(math.atan2(lp["front"][0] - lp["t_front"][0],
@@ -558,6 +562,8 @@ def main():
     print(f"valid={solid.is_valid} volume={solid.volume:.3f} mm3 build={info['build_seconds']} s")
     print(f"bbox X[{bb.min.X:.3f},{bb.max.X:.3f}] Y[{bb.min.Y:.3f},{bb.max.Y:.3f}] Z[{bb.min.Z:.3f},{bb.max.Z:.3f}]")
     print(f"neck front-face length (H1 closure) = {info['neck_length_front_face_s']:.3f} mm")
+    print(f"lug holes: D={info['lug_hole_d']} centre Z={info['lug_hole_center_z']:.3f} top arc R={info['lug_top_radius']:.3f} "
+          f"bridge={info['lug_bridge_above_hole']:.3f} mm")
     for item in info["fillets"]:
         print("  ", item)
     print(f"STEP -> {STEP_PATH}\nSTL  -> {STL_PATH}")

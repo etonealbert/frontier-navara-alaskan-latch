@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass
+from types import SimpleNamespace
 
 
 @dataclass(frozen=True)
@@ -52,16 +53,20 @@ DELTA_DEG = _p("DELTA_DEG", 0.0, "Д", "ТЗ §2, §10.1",
                "δ: A ↔ P; >0 — свободный конец лопатки поднимается к +Z")
 
 # --- Проушины (ТЗ §4, §12.2) -------------------------------------------------
-LUG_HOLE_D = _p("LUG_HOLE_D", 2.5, "И", "ТЗ §4", "Диаметр соосных сквозных отверстий под ось C")
+LUG_HOLE_D = _p("LUG_HOLE_D", 3.1, "У", "владелец, исправленный замер 13.11.2026 (в ТЗ §4: Ø2,5 «И» — ошибочно)",
+                "Диаметр соосных сквозных отверстий под ось C")
 LUG_THICKNESS = _p("LUG_THICKNESS", 3.0, "И", "ТЗ §4", "Толщина каждой проушины вдоль X")
 LUG_INNER_GAP = _p("LUG_INNER_GAP", 21.8, "И", "ТЗ §4", "Чистый зазор между внутренними плоскими гранями проушин")
-LUG_TOP_TO_HOLE_EDGE = _p("LUG_TOP_TO_HOLE_EDGE", 2.9, "И", "ТЗ §4", "От макушки до ближайшего края отверстия")
+LUG_TOP_TO_HOLE_EDGE = _p("LUG_TOP_TO_HOLE_EDGE", 2.9, "И", "ТЗ §4",
+                          "Перемычка: от макушки до ближайшего края отверстия; задаёт высоту центра C (Р, ТЗ §4/§10.2)")
+LUG_HOLE_CENTER_Z_FIXED = _p("LUG_HOLE_CENTER_Z_FIXED", None, "Д", "—",
+                             "None — центр C по цепи ТЗ: Z = H3 − (перемычка + Ø/2). Число — центр C жёстко на этой "
+                             "высоте над A (напр. 7.15 — положение до исправления Ø); перемычка тогда = H3 − Z − Ø/2")
 LUG_BASE_LENGTH = _p("LUG_BASE_LENGTH", 10.5, "И/?", "ТЗ §4, §12.2",
                      "Длина основания ушка вдоль Y; основание заподлицо с торцами площадки (Д)")
 LUG_HOLE_FROM_FRONT_END = _p("LUG_HOLE_FROM_FRONT_END", 5.25, "Д", "ТЗ §12.2",
                              "Центр отверстия от лицевого торца основания (середина основания)")
-LUG_TOP_RADIUS = _p("LUG_TOP_RADIUS", 4.15, "Д", "ТЗ §4, §12.2",
-                    "Дуга вершины ушка с центром в отверстии; касательные прямые к углам основания")
+# Дуга вершины ушка (Д, ТЗ §12.2): центр в отверстии, проходит через макушку → R = H3 − Z_C (см. derived()).
 LUG_ROOT_FILLET = _p("LUG_ROOT_FILLET", 0.5, "Д", "ТЗ §12.2", "Галтель корня проушин (на A)")
 LUG_HOLE_CHAMFER = _p("LUG_HOLE_CHAMFER", 0.2, "Д", "ТЗ §12.2", "Притупление кромок отверстий 0,2×45°")
 
@@ -160,22 +165,33 @@ STL_ANGULAR_TOLERANCE = _p("STL_ANGULAR_TOLERANCE", 0.1, "Д", "—", "Угло�
 
 
 # --- Производные величины, не зависящие от построения (Р) ------------------------
-def derived() -> dict[str, float]:
-    hole_z = H3_LUG - (LUG_TOP_TO_HOLE_EDGE + LUG_HOLE_D / 2.0)
-    lug_inner_x = LUG_INNER_GAP / 2.0
-    pad_front_y = -LUG_HOLE_FROM_FRONT_END
+def derived(c=None) -> dict[str, float]:
+    """Расчётные величины. c — конфигурация model.config() с учётом переопределений; None — значения модуля."""
+    g = c if c is not None else SimpleNamespace(**{name: prm.value for name, prm in PARAMS.items()})
+    if g.LUG_HOLE_CENTER_Z_FIXED is None:
+        hole_z = g.H3_LUG - (g.LUG_TOP_TO_HOLE_EDGE + g.LUG_HOLE_D / 2.0)
+    else:
+        hole_z = float(g.LUG_HOLE_CENTER_Z_FIXED)
+    top_radius = g.H3_LUG - hole_z
+    bridge = top_radius - g.LUG_HOLE_D / 2.0
+    if bridge <= 0 or hole_z - g.LUG_HOLE_D / 2.0 <= 0:
+        raise ValueError(f"hole Ø{g.LUG_HOLE_D} at Z={hole_z:.3f} does not fit between A and the lug top")
+    lug_inner_x = g.LUG_INNER_GAP / 2.0
+    pad_front_y = -g.LUG_HOLE_FROM_FRONT_END
     return {
         "LUG_HOLE_Z": hole_z,
+        "LUG_TOP_RADIUS": top_radius,
+        "LUG_BRIDGE": bridge,
         "LUG_INNER_X": lug_inner_x,
-        "LUG_OUTER_X": lug_inner_x + LUG_THICKNESS,
-        "LUG_MID_X": lug_inner_x + LUG_THICKNESS / 2.0,
-        "LUG_OUTER_SPAN": LUG_INNER_GAP + 2.0 * LUG_THICKNESS,
-        "LUG_HOLE_BOTTOM_Z": hole_z - LUG_HOLE_D / 2.0,
+        "LUG_OUTER_X": lug_inner_x + g.LUG_THICKNESS,
+        "LUG_MID_X": lug_inner_x + g.LUG_THICKNESS / 2.0,
+        "LUG_OUTER_SPAN": g.LUG_INNER_GAP + 2.0 * g.LUG_THICKNESS,
+        "LUG_HOLE_BOTTOM_Z": hole_z - g.LUG_HOLE_D / 2.0,
         "PAD_FRONT_Y": pad_front_y,
-        "PAD_BACK_Y": pad_front_y + PAD_LENGTH,
-        "HORN_CENTER_X": HORN_PITCH / 2.0,
-        "Z_TARGET_MIN": H3_LUG - H1_OVERALL,
-        "PAD_MARGIN_BEYOND_LUGS": (PAD_WIDTH_HORN_END - (LUG_INNER_GAP + 2.0 * LUG_THICKNESS)) / 2.0,
+        "PAD_BACK_Y": pad_front_y + g.PAD_LENGTH,
+        "HORN_CENTER_X": g.HORN_PITCH / 2.0,
+        "Z_TARGET_MIN": g.H3_LUG - g.H1_OVERALL,
+        "PAD_MARGIN_BEYOND_LUGS": (g.PAD_WIDTH_HORN_END - (g.LUG_INNER_GAP + 2.0 * g.LUG_THICKNESS)) / 2.0,
     }
 
 

@@ -47,6 +47,10 @@ def draw_segments(ax, segs, xy, **style):
         ax.add_collection(LineCollection([[xy(a), xy(b)] for a, b in segs], **style))
 
 
+def dec(v) -> str:
+    return f"{v:g}".replace(".", ",")
+
+
 def dim_line(ax, a, b, text, offset, color="#b00", fs=8, text_shift=(0, 0)):
     a, b = np.asarray(a, float), np.asarray(b, float)
     dvec = b - a
@@ -70,7 +74,7 @@ def main():
     info = results["build_info"]
     c = M.config()
     d = M.directions(c)
-    der = p.derived()
+    der = p.derived(c)
     mesh = trimesh.load(str(M.STL_PATH), force="mesh")
 
     fig = plt.figure(figsize=(16.5, 11.7))
@@ -87,7 +91,7 @@ def main():
     draw_segments(ax, section(mesh, (0, 0, 0), (1, 0, 0)), yz, colors="k", linewidths=1.1)
     hz = der["LUG_HOLE_Z"]
     ax.plot([0], [hz], marker="+", color="b", ms=14, mew=1.2)
-    ax.text(0.6, hz + 0.6, "C (ось Ø2,5)", color="b")
+    ax.text(0.6, hz + 0.6, f"C (ось Ø{dec(c.LUG_HOLE_D)})", color="b")
     ax.axhline(0, color="g", lw=0.6, ls="-.")
     ax.text(-40, 0.4, "A (Z=0)", color="g")
     z_top, z_low = 11.3, c.H3_LUG - c.H1_OVERALL
@@ -164,17 +168,18 @@ def main():
     segs = section(mesh, (12.4, 0, 0), (1, 0, 0))
     segs = segs[(segs[:, :, 2] > -2.6).all(axis=1)] if len(segs) else segs
     draw_segments(ax, segs, lambda q: (q[1], q[2]), colors="k", linewidths=1.0)
-    lp = M.lug_profile_points(c, der)
-    circ = plt.Circle((0, hz), c.LUG_TOP_RADIUS, fill=False, ls=":", color="0.5")
+    r_top = der["LUG_TOP_RADIUS"]
+    circ = plt.Circle((0, hz), r_top, fill=False, ls=":", color="0.5")
     ax.add_patch(circ)
     ax.plot([0], [hz], "+", color="b", ms=10)
     dim_line(ax, (-5.25, -2.5), (5.25, -2.5), "основание 10,50 (= длина площадки)", 1.6)
     dim_line(ax, (6.5, 0), (6.5, 11.3), "11,30", -1.2)
-    dim_line(ax, (-6.6, 0), (-6.6, hz), f"{hz:.2f}", 1.2)
-    ax.text(0.3, hz - 2.4, f"Ø{c.LUG_HOLE_D} (фаска 0,2)\nперемычка {c.LUG_TOP_TO_HOLE_EDGE}", fontsize=7, color="b")
-    ax.text(-4.8, 12.0, f"R{c.LUG_TOP_RADIUS} от центра отверстия (Д); боковины — касательные, развал "
+    dim_line(ax, (-6.6, 0), (-6.6, hz), f"{dec(round(hz, 2))}", 1.2)
+    ax.text(-8.2, -3.6, f"Ø{dec(c.LUG_HOLE_D)} (исправлено владельцем; было Ø2,5), фаска 0,2; "
+            f"перемычка {dec(round(der['LUG_BRIDGE'], 2))}", fontsize=7, color="b")
+    ax.text(-4.8, 12.0, f"R{dec(round(r_top, 2))} от центра отверстия (Д); боковины — касательные, развал "
             f"{info['lug_side_flare_deg']:.1f}°", fontsize=7)
-    ax.text(-4.8, -4.6, f"толщина 3,0 ×2; зазор 21,8; наружный размах 27,8; корень R{c.LUG_ROOT_FILLET}", fontsize=7)
+    ax.text(-8.2, -4.7, f"толщина 3,0 ×2; зазор 21,8; наружный размах 27,8; корень R{c.LUG_ROOT_FILLET}", fontsize=7)
     ax.set_aspect("equal")
     ax.set_xlim(-8.5, 9.5)
     ax.set_ylim(-5.5, 13)
@@ -185,10 +190,11 @@ def main():
     ax.axis("off")
     ax.set_title("Ключевые параметры (все — reports/assumptions.md)", loc="left")
     keys = ["H1_OVERALL", "H2_FLANGE", "H3_LUG", "L1_PADDLE", "ALPHA_DEG", "BETA_DEG", "GAMMA_DEG", "DELTA_DEG",
-            "LUG_HOLE_D", "LUG_INNER_GAP", "LUG_TOP_RADIUS", "FLANGE_THICKNESS", "PADDLE_S_V", "PADDLE_THICKNESS_TIP",
+            "LUG_HOLE_D", "LUG_INNER_GAP", "LUG_TOP_TO_HOLE_EDGE", "FLANGE_THICKNESS", "PADDLE_S_V", "PADDLE_THICKNESS_TIP",
             "TOOTH_LENGTH", "TOOTH_THICKNESS_ROOT", "TOOTH_THICKNESS_TIP", "TOOTH_ROOT_EDGE_OFFSET", "TOOTH_FLAT_FACE",
             "TOOTH_STEP_ENABLED", "RIB_OUTER_X", "FLANGE_EDGE_FILLET_BACK"]
     rows = [[k, str(p.PARAMS[k].value), p.PARAMS[k].status] for k in keys]
+    rows.append(["Центр C над A (Р)", f"{hz:.2f}", "Р"])
     rows.append(["Шейка (Р, из H1)", f"{info['neck_length_front_face_s']:.2f} / {info['neck_length_back_face']:.2f}", "Р"])
     tbl = ax.table(cellText=rows, colLabels=["параметр", "значение", "статус"], loc="upper left",
                    colWidths=[0.58, 0.24, 0.18], cellLoc="left")
