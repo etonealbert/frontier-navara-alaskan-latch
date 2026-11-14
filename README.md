@@ -1,48 +1,47 @@
-# Восстановление ручки-защёлки: CAD-проект для AI-агента
+# Armrest latch reconstruction
 
-**Назначение:** автономная реконструкция полной ручки-защёлки крышки автомобильного подлокотника по приложенному ТЗ и фотоальбому, включая повреждённый зуб. Параметрическая модель на **build123d**, итоговые файлы **STL и STEP**.
+A parametric **build123d** reconstruction of an automotive armrest lid latch, including its damaged tooth. The repository contains a preliminary model for a physical fit test, CAD source, reference material, and validation reports.
 
-## Как начать на другом Windows-компьютере
+> **Prototype only:** the tooth's retaining face and its engagement with the mating part have not been measured. Fit, retention, strength, fatigue resistance, and performance at automotive temperatures have not been verified.
 
-1. Распакуйте ZIP в обычную папку, например `C:\CAD\armrest_latch_agent_project`.
-2. В **Codex** (или Claude Code с доступом к терминалу) выберите **Open folder / рабочая папка** и укажите именно распакованную папку проекта.
-3. Отправьте агенту короткое сообщение:
+## Model previews
 
-   > Работай в открытой папке проекта. Прочитай AGENTS.md и START_AGENT.md и сразу выполняй задачу. Установи необходимые зависимости на Windows, создай полную параметрическую 3D-модель по input и подготовь реальные STL/STEP в output. Не останавливайся на предварительном плане; используй разрешённые в ТЗ допущения для первой версии, проверь геометрию и напиши отчёт об ограничениях.
+| Isometric view | Rear isometric view |
+| --- | --- |
+| ![Isometric view of the latch model](output/armrest_latch_v01_iso.png) | ![Rear isometric view of the latch model](output/armrest_latch_v01_iso_rear.png) |
 
-4. Готовые модели искать в `output/`. Файлы появятся **после** работы агента. Этот архив является заданием, а не уже построенной моделью.
+| Side view | Rear view |
+| --- | --- |
+| ![Side view of the latch model](output/armrest_latch_v01_side.png) | ![Rear view of the latch model](output/armrest_latch_v01_rear.png) |
 
-## Что внутри
+Additional views and a dimensioned drawing are available in [`output/`](output/).
 
-- `input/cad-latch-spec(1).md` — оригинальное ТЗ (ред. 2, 12 ноября 2026), байты сохранены без изменений.
-- `input/cad-photo-atlas(1).pdf` — оригинальный 12-страничный фотоальбом с 10 кадрами, байты сохранены без изменений.
-- `AGENTS.md` — исполняемые инструкции для Codex и других агентов, читающих этот файл.
-- `START_AGENT.md` — основное задание, требования к установке и алгоритм работы.
-- `ENGINEERING_RULES.md` — требования по CAD-модели и реконструкции зуба.
-- `ACCEPTANCE_CHECKLIST.md` — обязательные проверки и список результатов.
-- `WINDOWS_SETUP.md` — способ установки Python/build123d вручную и агентом.
-- `INPUT_SHA256.md` — контрольные суммы исходных файлов.
-- `src/` — агент создаёт исходный Python-код.
-- `output/` — агент сохраняет готовые STL/STEP и предпросмотры.
-- `reports/` — агент сохраняет отчёты о проверках, размерах и допущениях.
+## Files
 
-## Ограничения данных
+- [`output/armrest_latch_v01.step`](output/armrest_latch_v01.step) — editable solid model, in millimetres.
+- [`output/armrest_latch_v03.stl`](output/armrest_latch_v03.stl) — mesh for a slicer; STL does not store units, so use millimetres. Check the mesh and its revision before printing.
+- [`src/params.py`](src/params.py) — parameters and their provenance; [`src/model.py`](src/model.py) — model construction and export; [`src/validate.py`](src/validate.py) — validation checks.
+- [`reports/`](reports/) — validation, assumptions, parameters, printing handoff, and environment reports.
+- [`input/cad-latch-spec.md`](input/cad-latch-spec.md) — original specification; [`input/cad-photo-atlas.pdf`](input/cad-photo-atlas.pdf) — reference photo atlas. The photos are embedded in the PDF; separate original JPEG files are not included.
+- [`AGENTS.md`](AGENTS.md), [`START_AGENT.md`](START_AGENT.md), [`ENGINEERING_RULES.md`](ENGINEERING_RULES.md), and [`ACCEPTANCE_CHECKLIST.md`](ACCEPTANCE_CHECKLIST.md) — project instructions and acceptance criteria.
+- [`WINDOWS_SETUP.md`](WINDOWS_SETUP.md) — Windows setup; [`INPUT_SHA256.md`](INPUT_SHA256.md) — original input checksums.
 
-В исходном ТЗ **прямо разрешено** строить первую полную модель по приближённым значениям раздела 12 без новых вопросов. Однако **форма утраченной удерживающей ступеньки зуба и взаимодействие с ответной деталью не измерены**. Это означает: сделать пригодный для примерки предварительный прототип можно, но гарантировать удержание крышки по двум этим файлам нельзя. В финальном отчёте отделить геометрически проверенные размеры от гипотез.
+Some older reports refer to `output/armrest_latch_v01.stl`; the STL currently tracked in this repository is named `armrest_latch_v03.stl`. Confirm the relationship between these revisions before relying on the older validation results for the tracked mesh.
 
-В ТЗ упоминаются 10 оригинальных фотографий, но в данном пакете представлены **два присланных файла**, а фотографии включены в PDF-альбом. Отдельные оригинальные JPG/JPEG не добавлены; **не утверждать обратного**.
+## Rebuild
 
-## Результат V01
+Install the dependencies in [`requirements.txt`](requirements.txt) in a compatible Python environment, then run:
 
-Предварительная модель для примерки (удерживающая грань зуба не задана — см. отчёты). Редакция 13.11.2026: отверстия проушин Ø3,1 по исправленному замеру владельца (было Ø2,5).
+```powershell
+.\.venv\Scripts\python.exe src\run_all.py
+```
 
-- `output/armrest_latch_v01.step`, `output/armrest_latch_v01.stl` — модель в мм; виды `output/armrest_latch_v01_*.png` и чертёж-схема `output/armrest_latch_v01_drawing.{png,svg}`.
-- `src/params.py` — все параметры со статусами У/И/О/Д/Р/?; `src/model.py` — построение и экспорт; `src/validate.py` — проверки; `src/run_all.py` — полный цикл одной командой.
-- Отчёты: `reports/validation.md`, `reports/assumptions.md`, `reports/parameters.md`, `reports/print_handoff.md`, `reports/environment.md`.
-- Пересборка: `.venv/bin/python src/run_all.py` (Windows: `.\.venv\Scripts\python.exe src\run_all.py`); зависимости — `requirements.txt`.
+On Unix-like systems, use `.venv/bin/python src/run_all.py`. The pipeline builds the model, validates it, and generates views, a drawing, and photo comparisons. It writes generated files under `output/` and `reports/`.
 
-## Ссылки
+The 13 November 2026 revision uses **3.1 mm lug holes**, based on the owner's corrected measurement; the earlier 2.5 mm measurement was incorrect. The model remains a preliminary fit-test prototype, and the tooth's retaining geometry needs further measurements.
 
-- Официальный репозиторий: https://github.com/gumyr/build123d
-- Документация: https://build123d.readthedocs.io/en/latest/
-- Установка: https://build123d.readthedocs.io/en/latest/installation.html
+## References
+
+- [build123d repository](https://github.com/gumyr/build123d)
+- [build123d documentation](https://build123d.readthedocs.io/en/latest/)
+- [Installation instructions](https://build123d.readthedocs.io/en/latest/installation.html)
