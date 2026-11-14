@@ -257,7 +257,7 @@
 
 ### Визуальное сопоставление модели с фото
 
-Рисунки: `reports/figures/compare_*.png`; виды модели: `output/armrest_latch_v01_*.png`.
+Рисунки: `reports/figures/compare_*.png`; виды модели: `output/armrest_latch_v03_*.png`.
 
 | Сравнение | Что совпадает | Расхождения / замечания |
 |---|---|---|

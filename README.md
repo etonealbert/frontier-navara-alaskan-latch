@@ -8,25 +8,25 @@ A parametric **build123d** reconstruction of an automotive armrest lid latch, in
 
 | Isometric view | Rear isometric view |
 | --- | --- |
-| ![Isometric view of the latch model](output/armrest_latch_v01_iso.png) | ![Rear isometric view of the latch model](output/armrest_latch_v01_iso_rear.png) |
+| ![Isometric view of the latch model](output/armrest_latch_v03_iso.png) | ![Rear isometric view of the latch model](output/armrest_latch_v03_iso_rear.png) |
 
 | Side view | Rear view |
 | --- | --- |
-| ![Side view of the latch model](output/armrest_latch_v01_side.png) | ![Rear view of the latch model](output/armrest_latch_v01_rear.png) |
+| ![Side view of the latch model](output/armrest_latch_v03_side.png) | ![Rear view of the latch model](output/armrest_latch_v03_rear.png) |
 
 Additional views and a dimensioned drawing are available in [`output/`](output/).
 
 ## Files
 
-- [`output/armrest_latch_v01.step`](output/armrest_latch_v01.step) — editable solid model, in millimetres.
-- [`output/armrest_latch_v03.stl`](output/armrest_latch_v03.stl) — mesh for a slicer; STL does not store units, so use millimetres. Check the mesh and its revision before printing.
+- [`output/armrest_latch_v03.step`](output/armrest_latch_v03.step) — editable solid model, in millimetres.
+- [`output/armrest_latch_v03.stl`](output/armrest_latch_v03.stl) — mesh for a slicer; STL does not store units, so use millimetres.
 - [`src/params.py`](src/params.py) — parameters and their provenance; [`src/model.py`](src/model.py) — model construction and export; [`src/validate.py`](src/validate.py) — validation checks.
 - [`reports/`](reports/) — validation, assumptions, parameters, printing handoff, and environment reports.
-- [`input/cad-latch-spec.md`](input/cad-latch-spec.md) — original specification; [`input/cad-photo-atlas.pdf`](input/cad-photo-atlas.pdf) — reference photo atlas. The photos are embedded in the PDF; separate original JPEG files are not included.
+- [`input/cad-latch-spec.md`](input/cad-latch-spec.md) — original Russian specification; [`input/cad-photo-atlas.pdf`](input/cad-photo-atlas.pdf) — supplied English photo atlas and specification. The photos are embedded in the PDF; separate original JPEG files are not included.
 - [`AGENTS.md`](AGENTS.md), [`START_AGENT.md`](START_AGENT.md), [`ENGINEERING_RULES.md`](ENGINEERING_RULES.md), and [`ACCEPTANCE_CHECKLIST.md`](ACCEPTANCE_CHECKLIST.md) — project instructions and acceptance criteria.
 - [`WINDOWS_SETUP.md`](WINDOWS_SETUP.md) — Windows setup; [`INPUT_SHA256.md`](INPUT_SHA256.md) — original input checksums.
 
-Some older reports refer to `output/armrest_latch_v01.stl`; the STL currently tracked in this repository is named `armrest_latch_v03.stl`. Confirm the relationship between these revisions before relying on the older validation results for the tracked mesh.
+The V03 STL is byte-for-byte the V01 STL renamed in commit `430e2d8`; the other model exports and previews have likewise been renamed to V03. This is a file naming change, not a new geometry revision. Older validation reports describe the original V01 build.
 
 ## Rebuild
 

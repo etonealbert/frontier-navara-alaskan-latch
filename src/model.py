@@ -1,7 +1,7 @@
 """Параметрическая модель ручки-защёлки V01 на build123d.
 
 Запуск из корня проекта:  .venv/bin/python src/model.py
-Результат: output/armrest_latch_v01.step, output/armrest_latch_v01.stl,
+Результат: output/armrest_latch_v03.step, output/armrest_latch_v03.stl,
            reports/build_info.json (расчётные величины построения).
 
 Все связи вычисляются из src/params.py. Боковое сечение строится в плоскости
@@ -37,8 +37,8 @@ import params as p  # noqa: E402
 
 OUT_DIR = ROOT / "output"
 REPORT_DIR = ROOT / "reports"
-STEP_PATH = OUT_DIR / "armrest_latch_v01.step"
-STL_PATH = OUT_DIR / "armrest_latch_v01.stl"
+STEP_PATH = OUT_DIR / "armrest_latch_v03.step"
+STL_PATH = OUT_DIR / "armrest_latch_v03.stl"
 X_AXIS = (1.0, 0.0, 0.0)
 
 

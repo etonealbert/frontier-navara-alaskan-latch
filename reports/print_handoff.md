@@ -11,10 +11,10 @@
 
 | Файл | Назначение |
 |---|---|
-| [`output/armrest_latch_v01.stl`](../output/armrest_latch_v01.stl) | Сетка для слайсера. **Единицы — миллиметры** (STL единиц не хранит). Замкнута, одно тело, 87 364 треугольника, допуск триангуляции 0,01 мм |
-| [`output/armrest_latch_v01.step`](../output/armrest_latch_v01.step) | Твердотельная модель (STEP AP214, мм) — если нужно перетриангулировать или доработать в CAD |
-| [`output/armrest_latch_v01_drawing.png`](../output/armrest_latch_v01_drawing.png) / `.svg` | Схема с основными размерами и положением зуба относительно оси |
-| `output/armrest_latch_v01_{iso,iso_rear,side,rear,front,top,back}.png` | Виды для ориентации |
+| [`output/armrest_latch_v03.stl`](../output/armrest_latch_v03.stl) | Сетка для слайсера. **Единицы — миллиметры** (STL единиц не хранит). Замкнута, одно тело, 87 364 треугольника, допуск триангуляции 0,01 мм |
+| [`output/armrest_latch_v03.step`](../output/armrest_latch_v03.step) | Твердотельная модель (STEP AP214, мм) — если нужно перетриангулировать или доработать в CAD |
+| [`output/armrest_latch_v03_drawing.png`](../output/armrest_latch_v03_drawing.png) / `.svg` | Схема с основными размерами и положением зуба относительно оси |
+| `output/armrest_latch_v03_{iso,iso_rear,side,rear,front,top,back}.png` | Виды для ориентации |
 
 Оба файла получены из одного и того же твёрдого тела (`src/model.py`); совпадение объёма и габаритов проверено
 (`reports/validation.md`, разделы STEP/STL).

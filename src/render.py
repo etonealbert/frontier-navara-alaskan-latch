@@ -1,7 +1,7 @@
 """Рендеры для осмотра: изометрии, боковой, тыльный, лицевой и верхний виды (PNG).
 
 Запуск: .venv/bin/python src/render.py  (после src/model.py)
-Источник геометрии — экспортированный output/armrest_latch_v01.step (тот же файл,
+Источник геометрии — экспортированный output/armrest_latch_v03.step (тот же файл,
 что передаётся владельцу), триангулируется здесь только для визуализации.
 Рендер — ортографический, собственный z-буфер на numpy (без OpenGL).
 """
@@ -170,9 +170,9 @@ def main(views=None):
         if views and name not in views:
             continue
         im, info = render(verts, tris, spec["forward"], spec["up"])
-        annotate(im, f"armrest_latch_v01 — {spec['title']}", info["scale"],
+        annotate(im, f"armrest_latch_v03 — {spec['title']}", info["scale"],
                  [f"{len(tris)} треугольников визуализации (STL печати: отдельный файл)"])
-        path = OUT / f"armrest_latch_v01_{name}.png"
+        path = OUT / f"armrest_latch_v03_{name}.png"
         im.save(path)
         written.append(path)
         print("wrote", path)

@@ -48,10 +48,10 @@
 Из корня проекта (на Windows — `.\.venv\Scripts\python.exe` вместо `.venv/bin/python`):
 
 ```bash
-.venv/bin/python src/model.py            # перестроение → output/armrest_latch_v01.step + .stl, reports/build_info.json
+.venv/bin/python src/model.py            # перестроение → output/armrest_latch_v03.step + .stl, reports/build_info.json
 .venv/bin/python src/validate.py         # проверки → reports/validation.md, reports/validation_results.json
-.venv/bin/python src/render.py           # виды → output/armrest_latch_v01_{iso,iso_rear,side,rear,back,front,top}.png
-.venv/bin/python src/drawing.py          # чертёж-схема → output/armrest_latch_v01_drawing.{png,svg}
+.venv/bin/python src/render.py           # виды → output/armrest_latch_v03_{iso,iso_rear,side,rear,back,front,top}.png
+.venv/bin/python src/drawing.py          # чертёж-схема → output/armrest_latch_v03_drawing.{png,svg}
 .venv/bin/python src/compare_photos.py   # сопоставление с фото → reports/figures/compare_*.png
 # или всё сразу:
 .venv/bin/python src/run_all.py

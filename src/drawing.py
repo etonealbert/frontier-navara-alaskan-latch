@@ -1,7 +1,7 @@
 """Чертёж-схема V01 (ТЗ §13.7): боковое сечение, вид фланца, профиль проушины, таблица параметров.
 
 Запуск: .venv/bin/python src/drawing.py  (после model.py и validate.py)
-Сечения берутся из выданного STL (output/armrest_latch_v01.stl), подписи — из
+Сечения берутся из выданного STL (output/armrest_latch_v03.stl), подписи — из
 reports/validation_results.json (измеренные значения) и reports/build_info.json.
 Это поясняющая схема для владельца и печатника, а не чертёж по ЕСКД.
 """
@@ -202,8 +202,8 @@ def main():
     tbl.set_fontsize(6.6)
     tbl.scale(1, 1.13)
 
-    out_png = ROOT / "output" / "armrest_latch_v01_drawing.png"
-    out_svg = ROOT / "output" / "armrest_latch_v01_drawing.svg"
+    out_png = ROOT / "output" / "armrest_latch_v03_drawing.png"
+    out_svg = ROOT / "output" / "armrest_latch_v03_drawing.svg"
     fig.savefig(out_png, dpi=150)
     fig.savefig(out_svg)
     print("wrote", out_png, "and", out_svg)
