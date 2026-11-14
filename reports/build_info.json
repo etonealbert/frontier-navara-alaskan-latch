@@ -1,0 +1,147 @@
+{
+  "build_seconds": 3.15,
+  "overrides": {},
+  "directions_YZ": {
+    "u_neck": [
+      -0.342020143,
+      -0.939692621
+    ],
+    "F": [
+      -0.342020143,
+      -0.939692621
+    ],
+    "N": [
+      0.939692621,
+      -0.342020143
+    ],
+    "p_dir": [
+      -1.0,
+      0.0
+    ],
+    "w_P": [
+      0.0,
+      1.0
+    ],
+    "t_dir": [
+      1.0,
+      0.0
+    ],
+    "t_w": [
+      -0.0,
+      1.0
+    ]
+  },
+  "z_target_min": -22.2,
+  "neck_length_front_face_s": 3.4195142464219552,
+  "neck_length_back_face": 4.584218996073802,
+  "neck_length_start_reference": 5.1,
+  "flange_origin_Of_YZ": [
+    -6.419542752665404,
+    -5.713292304034997
+  ],
+  "flange_plate_zmin": -22.200000000000003,
+  "flange_tip_x_before_rounding": 36.17190361650971,
+  "neck_junction_fillet_radius": 1.2114659612481544,
+  "lug_hole_d": 3.1,
+  "lug_hole_center_z": 6.8500000000000005,
+  "lug_top_radius": 4.45,
+  "lug_bridge_above_hole": 2.9000000000000004,
+  "lug_tangent_point_front_YZ": [
+    -4.422017148204831,
+    7.348261317967207
+  ],
+  "lug_tangent_point_back_YZ": [
+    4.422017148204831,
+    7.348261317967205
+  ],
+  "lug_side_flare_deg": 6.428822784034885,
+  "S_point_YZ": [
+    -7.6166132543052445,
+    -9.002216476785676
+  ],
+  "rib_corner_YZ": [
+    -1.8446311280770815,
+    -2.5
+  ],
+  "rib_leg_pad_end_YZ": [
+    2.6553688719229185,
+    -2.5
+  ],
+  "rib_leg_neck_end_YZ": [
+    -3.383721773042591,
+    -6.728616793536588
+  ],
+  "rib_x": [
+    0.0,
+    13.0,
+    -13.0
+  ],
+  "tooth_lower_root_R0_YZ": [
+    -8.884848659361195,
+    -21.84283869525167
+  ],
+  "tooth_flat_root_YZ": [
+    -6.992203441176943,
+    -16.642838695251672
+  ],
+  "tooth_tip_flat_YZ": [
+    3.007796558823057,
+    -16.642838695251672
+  ],
+  "tooth_tip_other_YZ": [
+    3.007796558823057,
+    -18.642838695251672
+  ],
+  "tooth_root_v": 16.0,
+  "feature_zmin": {
+    "flange_plate": -22.200000000000003,
+    "paddle": -14.914720370396743,
+    "tooth": -21.84283869525167
+  },
+  "fillets": [
+    {
+      "fillet": "lug roots",
+      "radius": 0.5,
+      "edges": 4,
+      "status": "applied"
+    },
+    {
+      "fillet": "tooth upper root",
+      "radius": 1.0,
+      "edges": 1,
+      "status": "applied"
+    },
+    {
+      "fillet": "paddle root",
+      "radius": 1.0,
+      "edges": 8,
+      "status": "applied"
+    },
+    {
+      "fillet": "rib roots",
+      "radius": 0.5,
+      "edges": 12,
+      "status": "applied"
+    },
+    {
+      "chamfer": "hole edges",
+      "length": 0.2,
+      "edges": 4,
+      "status": "applied (4 rims)"
+    }
+  ],
+  "volume_mm3": 11008.366329460348,
+  "bbox": {
+    "min": [
+      -34.99999989266211,
+      -37.61661335430525,
+      -22.200000000000003
+    ],
+    "max": [
+      34.99999999266211,
+      7.250000000000001,
+      11.3
+    ]
+  },
+  "is_valid": true
+}

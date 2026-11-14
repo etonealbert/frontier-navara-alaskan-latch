@@ -1,0 +1,10 @@
+# Direct dependencies used to build and validate V01.
+# Install with: python -m pip install -r requirements.txt
+build123d==0.13.0
+cadquery-ocp-novtk==8.0.1.1.0
+numpy==2.5.4
+trimesh==4.7.0
+manifold3d==3.5.4
+matplotlib==3.11.2
+pypdfium2==5.15.2
+pillow==13.0.0

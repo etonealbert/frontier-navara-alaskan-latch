@@ -1,0 +1,1464 @@
+{
+  "started": "2026-11-13 11:00:57",
+  "build_info": {
+    "build_seconds": 10.07,
+    "overrides": {},
+    "directions_YZ": {
+      "u_neck": [
+        -0.342020143,
+        -0.939692621
+      ],
+      "F": [
+        -0.342020143,
+        -0.939692621
+      ],
+      "N": [
+        0.939692621,
+        -0.342020143
+      ],
+      "p_dir": [
+        -1.0,
+        0.0
+      ],
+      "w_P": [
+        0.0,
+        1.0
+      ],
+      "t_dir": [
+        1.0,
+        0.0
+      ],
+      "t_w": [
+        -0.0,
+        1.0
+      ]
+    },
+    "z_target_min": -22.2,
+    "neck_length_front_face_s": 3.4195142464219552,
+    "neck_length_back_face": 4.584218996073802,
+    "neck_length_start_reference": 5.1,
+    "flange_origin_Of_YZ": [
+      -6.419542752665404,
+      -5.713292304034997
+    ],
+    "flange_plate_zmin": -22.200000000000003,
+    "flange_tip_x_before_rounding": 36.17190361650971,
+    "neck_junction_fillet_radius": 1.2114659612481544,
+    "lug_hole_d": 3.1,
+    "lug_hole_center_z": 6.8500000000000005,
+    "lug_top_radius": 4.45,
+    "lug_bridge_above_hole": 2.9000000000000004,
+    "lug_tangent_point_front_YZ": [
+      -4.422017148204831,
+      7.348261317967207
+    ],
+    "lug_tangent_point_back_YZ": [
+      4.422017148204831,
+      7.348261317967205
+    ],
+    "lug_side_flare_deg": 6.428822784034885,
+    "S_point_YZ": [
+      -7.6166132543052445,
+      -9.002216476785676
+    ],
+    "rib_corner_YZ": [
+      -1.8446311280770815,
+      -2.5
+    ],
+    "rib_leg_pad_end_YZ": [
+      2.6553688719229185,
+      -2.5
+    ],
+    "rib_leg_neck_end_YZ": [
+      -3.383721773042591,
+      -6.728616793536588
+    ],
+    "rib_x": [
+      0.0,
+      13.0,
+      -13.0
+    ],
+    "tooth_lower_root_R0_YZ": [
+      -8.884848659361195,
+      -21.84283869525167
+    ],
+    "tooth_flat_root_YZ": [
+      -6.992203441176943,
+      -16.642838695251672
+    ],
+    "tooth_tip_flat_YZ": [
+      3.007796558823057,
+      -16.642838695251672
+    ],
+    "tooth_tip_other_YZ": [
+      3.007796558823057,
+      -18.642838695251672
+    ],
+    "tooth_root_v": 16.0,
+    "feature_zmin": {
+      "flange_plate": -22.200000000000003,
+      "paddle": -14.914720370396743,
+      "tooth": -21.84283869525167
+    },
+    "fillets": [
+      {
+        "fillet": "lug roots",
+        "radius": 0.5,
+        "edges": 4,
+        "status": "applied"
+      },
+      {
+        "fillet": "tooth upper root",
+        "radius": 1.0,
+        "edges": 1,
+        "status": "applied"
+      },
+      {
+        "fillet": "paddle root",
+        "radius": 1.0,
+        "edges": 8,
+        "status": "applied"
+      },
+      {
+        "fillet": "rib roots",
+        "radius": 0.5,
+        "edges": 12,
+        "status": "applied"
+      },
+      {
+        "chamfer": "hole edges",
+        "length": 0.2,
+        "edges": 4,
+        "status": "applied (4 rims)"
+      }
+    ]
+  },
+  "checks": [
+    {
+      "group": "Источники",
+      "item": "SHA-256 input/cad-latch-spec(1).md",
+      "method": "sha256 файлов input/ против INPUT_SHA256.md",
+      "measured": true,
+      "expected": true,
+      "tol": null,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "совпадает с input/cad-latch-spec.md (имя файла без «(1)»)"
+    },
+    {
+      "group": "Источники",
+      "item": "SHA-256 input/cad-photo-atlas(1).pdf",
+      "method": "sha256 файлов input/ против INPUT_SHA256.md",
+      "measured": true,
+      "expected": true,
+      "tol": null,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "совпадает с input/cad-photo-atlas.pdf (имя файла без «(1)»)"
+    },
+    {
+      "group": "Построение",
+      "item": "build123d-скрипт выполнен без ошибок",
+      "method": "model.build() в этом процессе",
+      "measured": true,
+      "expected": true,
+      "tol": null,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "10.07 с"
+    },
+    {
+      "group": "Построение",
+      "item": "Скругление/фаска: lug roots",
+      "method": "журнал build(): операция выполнена, тело валидно после неё",
+      "measured": true,
+      "expected": true,
+      "tol": null,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "R/фаска 0.5, рёбер 4"
+    },
+    {
+      "group": "Построение",
+      "item": "Скругление/фаска: tooth upper root",
+      "method": "журнал build(): операция выполнена, тело валидно после неё",
+      "measured": true,
+      "expected": true,
+      "tol": null,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "R/фаска 1.0, рёбер 1"
+    },
+    {
+      "group": "Построение",
+      "item": "Скругление/фаска: paddle root",
+      "method": "журнал build(): операция выполнена, тело валидно после неё",
+      "measured": true,
+      "expected": true,
+      "tol": null,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "R/фаска 1.0, рёбер 8"
+    },
+    {
+      "group": "Построение",
+      "item": "Скругление/фаска: rib roots",
+      "method": "журнал build(): операция выполнена, тело валидно после неё",
+      "measured": true,
+      "expected": true,
+      "tol": null,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "R/фаска 0.5, рёбер 12"
+    },
+    {
+      "group": "Построение",
+      "item": "Скругление/фаска: hole edges",
+      "method": "журнал build(): операция выполнена, тело валидно после неё",
+      "measured": true,
+      "expected": true,
+      "tol": null,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "R/фаска 0.2, рёбер 4"
+    },
+    {
+      "group": "Топология",
+      "item": "Число твёрдых тел",
+      "method": "len(solids())",
+      "measured": 1,
+      "expected": 1,
+      "tol": 0,
+      "unit": "шт",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Топология",
+      "item": "Число оболочек (нет внутренних пустот)",
+      "method": "len(shells())",
+      "measured": 1,
+      "expected": 1,
+      "tol": 0,
+      "unit": "шт",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Топология",
+      "item": "BRepCheck_Analyzer",
+      "method": "OCCT BRepCheck_Analyzer.IsValid",
+      "measured": true,
+      "expected": true,
+      "tol": null,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Топология",
+      "item": "Нет самопересечений/малых рёбер (BRepAlgoAPI_Check)",
+      "method": "OCCT BRepAlgoAPI_Check(тест малых рёбер, тест самопересечений)",
+      "measured": true,
+      "expected": true,
+      "tol": null,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Топология",
+      "item": "Свободные рёбра (щели в оболочке)",
+      "method": "рёбра с одной смежной гранью, кроме швов замкнутых поверхностей",
+      "measured": 0,
+      "expected": 0,
+      "tol": 0,
+      "unit": "шт",
+      "status": "PASS",
+      "note": "швов цилиндров/конусов: 0"
+    },
+    {
+      "group": "Топология",
+      "item": "Неманифолдные рёбра",
+      "method": "рёбра с >2 смежными гранями",
+      "measured": 0,
+      "expected": 0,
+      "tol": 0,
+      "unit": "шт",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Топология",
+      "item": "Объём положительный",
+      "method": "solid.volume",
+      "measured": 11008.366329460348,
+      "expected": null,
+      "tol": null,
+      "unit": "мм³",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Топология",
+      "item": "Минимальная длина ребра",
+      "method": "min(edge.length)",
+      "measured": 0.04198039956526023,
+      "expected": null,
+      "tol": null,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "порог 0,01 мм"
+    },
+    {
+      "group": "Топология",
+      "item": "Минимальная площадь грани",
+      "method": "min(face.area)",
+      "measured": 0.03165040046890254,
+      "expected": null,
+      "tol": null,
+      "unit": "мм²",
+      "status": "PASS",
+      "note": "порог 0,001 мм²"
+    },
+    {
+      "group": "Топология",
+      "item": "Граней / рёбер",
+      "method": "подсчёт",
+      "measured": 162,
+      "expected": null,
+      "tol": null,
+      "unit": "шт",
+      "status": "INFO",
+      "note": "рёбер 419"
+    },
+    {
+      "group": "Главные размеры",
+      "item": "H1 = 33,5: макушка проушины → нижняя кромка фланца вдоль H (=Z)",
+      "method": "BRepExtrema: точки тела, ближайшие к касательным плоскостям Z=max и Z=min",
+      "measured": 33.49999989999999,
+      "expected": 33.5,
+      "tol": 0.005,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "верх (10.90; 0.00; 11.300) на проушине; низ (0.00; -9.29; -22.200) на тыльно-нижней кромке фланца"
+    },
+    {
+      "group": "Главные размеры",
+      "item": "Верхняя точка H1 — макушка проушины",
+      "method": "X верхней точки в пределах проушины",
+      "measured": true,
+      "expected": true,
+      "tol": null,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Главные размеры",
+      "item": "Нижняя точка H1 — фланец, не лопатка и не зуб",
+      "method": "сравнение минимумов Z отдельных элементов до объединения",
+      "measured": true,
+      "expected": true,
+      "tol": null,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "фланец -22.200; зуб -21.843; лопатка -14.915"
+    },
+    {
+      "group": "Главные размеры",
+      "item": "H3 = 11,3: от A до макушки проушины по нормали к A",
+      "method": "Z макушки − Z плоской грани A (нормаль +Z, содержит начало координат под C)",
+      "measured": 11.3,
+      "expected": 11.3,
+      "tol": 0.005,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "Z(A) = 0.000000; расстояние A до начала координат 0.00e+00"
+    },
+    {
+      "group": "Главные размеры",
+      "item": "H2 = 16,5: собственная высота фланца вдоль F",
+      "method": "тело переведено в локальную систему фланца (x=X, y=V вдоль F, z=N); экстремумы V в слое пластины; низ — вершина выпуклой кромки, верх — прямая кончиков крылышек (X 19…37)",
+      "measured": 16.500000200000006,
+      "expected": 16.5,
+      "tol": 0.005,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "V_max=16.5000, V_min(крылышко)=-0.0000"
+    },
+    {
+      "group": "Главные размеры",
+      "item": "L1 = 30,0: от S до крайней точки свободного торца вдоль P",
+      "method": "S — линия выхода верхней грани лопатки (P) из лицевой плоскости фланца (виртуальная острая кромка); крайняя точка — BRepExtrema к плоскости ⟂P",
+      "measured": 30.0,
+      "expected": 30.0,
+      "tol": 0.005,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "S=(Y -7.617; Z -9.002); крайняя точка X=11.802"
+    },
+    {
+      "group": "Проушины",
+      "item": "Сечение по X над отверстием: два интервала",
+      "method": "прямая вдоль X при Y=0, Z=9.85",
+      "measured": 2,
+      "expected": 2,
+      "tol": 0,
+      "unit": "шт",
+      "status": "PASS",
+      "note": "[(-13.9, -10.9), (10.9, 13.9)]"
+    },
+    {
+      "group": "Проушины",
+      "item": "Чистый зазор между внутренними гранями 21,8",
+      "method": "b0 − a1 по той же прямой",
+      "measured": 21.799999999999997,
+      "expected": 21.8,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Проушины",
+      "item": "Толщина проушины (−X) 3,0",
+      "method": "a1 − a0",
+      "measured": 3.0,
+      "expected": 3.0,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Проушины",
+      "item": "Толщина проушины (+X) 3,0",
+      "method": "b1 − b0",
+      "measured": 3.0,
+      "expected": 3.0,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Проушины",
+      "item": "Наружный размах 27,8 (Р)",
+      "method": "b1 − a0",
+      "measured": 27.799999999999997,
+      "expected": 27.8,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Проушины",
+      "item": "Средние плоскости ±12,4 (Р)",
+      "method": "(a0+a1)/2, (b0+b1)/2",
+      "measured": 12.399999999999999,
+      "expected": 12.4,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "−X: -12.400"
+    },
+    {
+      "group": "Проушины",
+      "item": "Отверстия сквозные по оси C",
+      "method": "прямая вдоль X по оси Y=0, Z=6.85 не пересекает тело",
+      "measured": 0,
+      "expected": 0,
+      "tol": 0,
+      "unit": "интервалов",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Проушины",
+      "item": "Отверстия: по одной цилиндрической грани в каждой проушине",
+      "method": "вогнутые грани-цилиндры с осью ∥X в пределах толщин проушин",
+      "measured": 2,
+      "expected": 2,
+      "tol": 0,
+      "unit": "шт",
+      "status": "PASS",
+      "note": "стороны X: [-1, 1]; выпуклых дуг вершины ушка: 2"
+    },
+    {
+      "group": "Проушины",
+      "item": "Диаметр отверстий Ø3,1 (грани-цилиндры, обе проушины)",
+      "method": "2 × радиус граней",
+      "measured": 3.1,
+      "expected": 3.1,
+      "tol": 1e-06,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "исправленный замер владельца (ранее Ø2,5)"
+    },
+    {
+      "group": "Проушины",
+      "item": "Соосность отверстий (отклонение осей от C)",
+      "method": "расстояние осей цилиндров до линии Y=0, Z=6.85",
+      "measured": 0.0,
+      "expected": 0.0,
+      "tol": 1e-06,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Проушины",
+      "item": "Центр отверстия над A = 6,85 (Р)",
+      "method": "Z оси цилиндров − Z(A)",
+      "measured": 6.8500000000000005,
+      "expected": 6.8500000000000005,
+      "tol": 1e-06,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "H3 − (перемычка + Ø/2)"
+    },
+    {
+      "group": "Проушины",
+      "item": "Перемычка над отверстием 2,9",
+      "method": "Z макушки − (Z оси + R)",
+      "measured": 2.9000000000000004,
+      "expected": 2.9000000000000004,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Проушины",
+      "item": "Диаметр отверстий Ø3,1 (лучи в средних плоскостях проушин)",
+      "method": "просвет между интервалами тела вдоль Z и вдоль Y через ось C, X = ±12,4",
+      "measured": 3.0999999999999943,
+      "expected": 3.1,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "3.1000; 3.1000; 3.1000; 3.1000"
+    },
+    {
+      "group": "Проушины",
+      "item": "Основание ушка вдоль Y (у A, Z=0,05)",
+      "method": "прямая вдоль Y в средней плоскости проушины",
+      "measured": 10.488732262,
+      "expected": 10.48873226174237,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "Д: касательные к дуге R4.45, развал боковин 6.43°"
+    },
+    {
+      "group": "Площадка",
+      "item": "Ширина площадки у торца рожков 30,8",
+      "method": "прямая вдоль X при Y=5.20, середина толщины",
+      "measured": 30.808952379999994,
+      "expected": 30.80895238095238,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "номинал 30.8 на самом торце"
+    },
+    {
+      "group": "Площадка",
+      "item": "Ширина площадки у перехода к шейке 32,68",
+      "method": "прямая вдоль X при Y=-5.20, середина толщины",
+      "measured": 32.671047619999996,
+      "expected": 32.67104761904762,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "номинал 32.68 на самом торце"
+    },
+    {
+      "group": "Площадка",
+      "item": "Длина площадки 10,5 в плоскости A",
+      "method": "прямая вдоль Y при X=5, Z=−1,25",
+      "measured": 10.5,
+      "expected": 10.5,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Площадка",
+      "item": "Толщина площадки 2,5",
+      "method": "прямая вдоль Z при X=5, Y=0 (первый интервал)",
+      "measured": 2.5,
+      "expected": 2.5,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Рожки",
+      "item": "Количество рожков",
+      "method": "прямая вдоль X через рожки",
+      "measured": 2,
+      "expected": 2,
+      "tol": 0,
+      "unit": "шт",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Рожки",
+      "item": "Межцентровое расстояние 18,0",
+      "method": "разность центров интервалов",
+      "measured": 18.0,
+      "expected": 18.0,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Рожки",
+      "item": "Ширина рожка 2,2",
+      "method": "длина интервала",
+      "measured": 2.200000000000003,
+      "expected": 2.2,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Рожки",
+      "item": "Вылет рожков за торец 2,0",
+      "method": "конец интервала по Y − Y торца площадки",
+      "measured": 2.0,
+      "expected": 2.0,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Шейка",
+      "item": "Итоговая длина шейки по лицевой грани (Р, из H1)",
+      "method": "от нижнего лицевого угла площадки до прямой V=0 вдоль шейки",
+      "measured": 3.4195142464219552,
+      "expected": null,
+      "tol": null,
+      "unit": "мм",
+      "status": "INFO",
+      "note": "стартовое значение исходника 5.1 подчинено H1 (ТЗ §10.2)"
+    },
+    {
+      "group": "Шейка",
+      "item": "Длина шейки по тыльной грани (Р)",
+      "method": "от низа площадки до прямой V=0",
+      "measured": 4.584218996073802,
+      "expected": null,
+      "tol": null,
+      "unit": "мм",
+      "status": "INFO",
+      "note": ""
+    },
+    {
+      "group": "Шейка",
+      "item": "Ширина шейки у площадки",
+      "method": "прямая вдоль X в середине толщины, V=-3.370",
+      "measured": 32.699300986,
+      "expected": 32.699300986995176,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "линейный переход 32,68 → 34,0 (И)"
+    },
+    {
+      "group": "Шейка",
+      "item": "Ширина шейки над переходом к фланцу",
+      "method": "прямая вдоль X в середине толщины, V=-1.261",
+      "measured": 33.513049238,
+      "expected": 33.51304923774191,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "линейный переход 32,68 → 34,0 (И)"
+    },
+    {
+      "group": "Шейка",
+      "item": "Вогнутый переход шейки к прямой V=0 (ширина сопряжения 36)",
+      "method": "ширина при V=-0.02 против расчёта дуги R1.211, касательной к V=0 в X=±18",
+      "measured": 35.56155439,
+      "expected": 35.561554389006226,
+      "tol": 0.005,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Шейка",
+      "item": "Лицевая грань шейки в одной плоскости с лицевой гранью фланца",
+      "method": "точки ±0,01 мм от лицевой плоскости фланца в середине шейки: внутри/снаружи",
+      "measured": true,
+      "expected": true,
+      "tol": null,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Рёбра",
+      "item": "Количество рёбер (раздельные, в центре треугольника профиля)",
+      "method": "прямая вдоль X через центр профиля",
+      "measured": 3,
+      "expected": 3,
+      "tol": 0,
+      "unit": "шт",
+      "status": "PASS",
+      "note": "X=-13.00 t=2.000; X=0.00 t=2.000; X=13.00 t=2.000"
+    },
+    {
+      "group": "Рёбра",
+      "item": "Толщина рёбер 2,0",
+      "method": "максимальное отклонение длины интервала",
+      "measured": 0.0,
+      "expected": 0.0,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Рёбра",
+      "item": "Положение рёбер X = −13 / 0 / +13",
+      "method": "центры интервалов",
+      "measured": 0.0,
+      "expected": 0.0,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Рёбра",
+      "item": "Рёбра объединены с телом (не висят)",
+      "method": "одно тело + наличие материала в центре каждого ребра",
+      "measured": true,
+      "expected": true,
+      "tol": null,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Фланец",
+      "item": "Полная ширина 70 (после скругления кончиков R1)",
+      "method": "габарит по X (BRepExtrema/bbox)",
+      "measured": 69.99999988532423,
+      "expected": 70.0,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Фланец",
+      "item": "Толщина пластины 3,2",
+      "method": "прямая вдоль N в крылышке (X=30, V=2)",
+      "measured": 3.1999999999999993,
+      "expected": 3.2,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Фланец",
+      "item": "Контур проходит через опорную точку (X=0; V=16.5)",
+      "method": "прямая вдоль F в середине толщины; крайний V = выпуклая кромка",
+      "measured": 16.5,
+      "expected": 16.5,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Фланец",
+      "item": "Контур проходит через опорную точку (X=9; V=16.2)",
+      "method": "прямая вдоль F в середине толщины; крайний V = выпуклая кромка",
+      "measured": 16.200000000000003,
+      "expected": 16.2,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Фланец",
+      "item": "Контур проходит через опорную точку (X=18; V=14.3)",
+      "method": "прямая вдоль F в середине толщины; крайний V = выпуклая кромка",
+      "measured": 14.299999999999997,
+      "expected": 14.3,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Фланец",
+      "item": "Контур проходит через опорную точку (X=26; V=9.8)",
+      "method": "прямая вдоль F в середине толщины; крайний V = выпуклая кромка",
+      "measured": 9.799999999999997,
+      "expected": 9.8,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Фланец",
+      "item": "Выпуклая кромка без перегибов и волн",
+      "method": "вторые разности V(X) на шаге 1 мм, X∈[−33;33]",
+      "measured": -0.002359174000005737,
+      "expected": null,
+      "tol": null,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "все вторые разности < 0; диапазон -0.0484…-0.0024"
+    },
+    {
+      "group": "Фланец",
+      "item": "Симметрия контура относительно B",
+      "method": "max |V(X) − V(−X)|",
+      "measured": 0.0,
+      "expected": 0.0,
+      "tol": 0.0001,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Фланец",
+      "item": "Нет общего R27: радиус кривизны у вершины",
+      "method": "1/|V''| в вершине",
+      "measured": 423.8771705679904,
+      "expected": null,
+      "tol": null,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "сплайн по точкам ТЗ §12.1; R27 не задан ни на одном участке"
+    },
+    {
+      "group": "Фланец",
+      "item": "Противоположная кромка — прямая V=0",
+      "method": "начало интервала вдоль F при X=±25",
+      "measured": 0.0,
+      "expected": 0.0,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Углубление",
+      "item": "Глубина 1,5 (дно 1,7)",
+      "method": "прямая вдоль N через центр углубления: тыльная граница",
+      "measured": 1.5000000000000009,
+      "expected": 1.5,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "остаток стенки 1.700"
+    },
+    {
+      "group": "Углубление",
+      "item": "Длина 48 с закрытыми концами",
+      "method": "прямая вдоль X внутри углубления: длина разрыва",
+      "measured": 48.0,
+      "expected": 48.0,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "материал по обе стороны — концы закрыты"
+    },
+    {
+      "group": "Углубление",
+      "item": "Ширина 2,5",
+      "method": "прямая вдоль F внутри углубления",
+      "measured": 2.5,
+      "expected": 2.5,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Лопатка",
+      "item": "Толщина при u=5 от S (6 → 3 линейно)",
+      "method": "прямая по нормали к P при X=0",
+      "measured": 5.5,
+      "expected": 5.5,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Лопатка",
+      "item": "Толщина при u=15 от S (6 → 3 линейно)",
+      "method": "прямая по нормали к P при X=0",
+      "measured": 4.5,
+      "expected": 4.5,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Лопатка",
+      "item": "Толщина при u=25 от S (6 → 3 линейно)",
+      "method": "прямая по нормали к P при X=0",
+      "measured": 3.5,
+      "expected": 3.5,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Лопатка",
+      "item": "Ширина при u=5 (52 у S → 40 у конца)",
+      "method": "прямая вдоль X в середине толщины (до начала дуг R10)",
+      "measured": 50.0,
+      "expected": 50.0,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Лопатка",
+      "item": "Ширина при u=15 (52 у S → 40 у конца)",
+      "method": "прямая вдоль X в середине толщины (до начала дуг R10)",
+      "measured": 46.0,
+      "expected": 46.0,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Лопатка",
+      "item": "Ширина при u=20 (52 у S → 40 у конца)",
+      "method": "прямая вдоль X в середине толщины (до начала дуг R10)",
+      "measured": 44.0,
+      "expected": 44.0,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Лопатка",
+      "item": "Углы свободного конца R10 в плане",
+      "method": "ширина в 0,5 мм от торца против расчёта дуги R10, касательной к торцу и боковине",
+      "measured": 29.848919943999995,
+      "expected": 29.84891994402726,
+      "tol": 0.01,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Лопатка",
+      "item": "Голый корень лопатки (без галтели) внутри контура фланца",
+      "method": "V кромки фланца при X = полуширине корня − V нижней линии корня (≈ без скругления R1,4)",
+      "measured": 0.447682319632861,
+      "expected": null,
+      "tol": null,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "угол корня X=±25.58, V=9.66"
+    },
+    {
+      "group": "Лопатка",
+      "item": "Галтель корня лопатки не выходит за контур фланца",
+      "method": "сечения STL плоскостями ∥ лицевой на 0,05/0,3/0,8 мм перед ней: max(V − V_кромки)",
+      "measured": -0.539880418814672,
+      "expected": null,
+      "tol": null,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "у нижних углов корня (|X|>23,5) галтель R1 сливается со скруглением кромки R0,5 — допущение V01"
+    },
+    {
+      "group": "Углы",
+      "item": "α лопатка–фланец ≈110°",
+      "method": "луч по верхней грани P к свободному концу ↔ луч по лицевой грани фланца к его верхней кромке (нормали реальных граней)",
+      "measured": 110.0,
+      "expected": 110.0,
+      "tol": 1e-06,
+      "unit": "°",
+      "status": "PASS",
+      "note": "сторона: верх фланца наклонён к +Y (к рожкам); δ=0.0"
+    },
+    {
+      "group": "Углы",
+      "item": "β площадка–шейка ≈110°",
+      "method": "луч по A к рожкам ↔ луч по лицевой грани шейки к фланцу",
+      "measured": 110.0,
+      "expected": 110.0,
+      "tol": 1e-06,
+      "unit": "°",
+      "status": "PASS",
+      "note": "тупой угол, шейка уходит вниз-к лопатке (−Y)"
+    },
+    {
+      "group": "Углы",
+      "item": "Наклон F к H",
+      "method": "угол между лучом шейки/фланца вниз и −Z",
+      "measured": 19.999999999999993,
+      "expected": 20.0,
+      "tol": 1e-06,
+      "unit": "°",
+      "status": "PASS",
+      "note": "Р: α + δ − 90°"
+    },
+    {
+      "group": "Углы",
+      "item": "γ зуб–P = 0° (зуб не загнут)",
+      "method": "угол между нормалями прямой грани зуба и верхней грани лопатки",
+      "measured": 0.0,
+      "expected": 0.0,
+      "tol": 1e-06,
+      "unit": "°",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Углы",
+      "item": "δ A–P = 0°",
+      "method": "угол между нормалями A и P",
+      "measured": 0.0,
+      "expected": 0.0,
+      "tol": 1e-06,
+      "unit": "°",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Зуб",
+      "item": "Ширина 17,5, симметрично B",
+      "method": "прямая вдоль X через тело зуба",
+      "measured": 17.5,
+      "expected": 17.5,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "центр X=0.0000"
+    },
+    {
+      "group": "Зуб",
+      "item": "Вылет 10,0 вдоль направления зуба",
+      "method": "от линии корня прямой грани до торца (прямая ∥ зубу)",
+      "measured": 10.0,
+      "expected": 10.0,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "отсчёт от тыльной плоскости фланца на уровне прямой грани"
+    },
+    {
+      "group": "Зуб",
+      "item": "Толщина в 3 мм от корня прямой грани",
+      "method": "прямая по нормали к P",
+      "measured": 3.8835170469999998,
+      "expected": 3.883517046800459,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "клин 5,2 у нижней линии корня → 2,0 у конца"
+    },
+    {
+      "group": "Зуб",
+      "item": "Толщина в 6 мм от корня прямой грани",
+      "method": "прямая по нормали к P",
+      "measured": 3.0762954550000003,
+      "expected": 3.0762954553145483,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "клин 5,2 у нижней линии корня → 2,0 у конца"
+    },
+    {
+      "group": "Зуб",
+      "item": "Толщина в 9.5 мм от корня прямой грани",
+      "method": "прямая по нормали к P",
+      "measured": 2.1345369319999996,
+      "expected": 2.1345369319143184,
+      "tol": 0.002,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "клин 5,2 у нижней линии корня → 2,0 у конца"
+    },
+    {
+      "group": "Зуб",
+      "item": "Отступ корня от выпуклой кромки вдоль F (X=0)",
+      "method": "H2 − V нижней линии корня",
+      "measured": 0.5,
+      "expected": 0.5,
+      "tol": 1e-09,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "Зуб",
+      "item": "Положение корня прямой грани относительно C",
+      "method": "ΔY, ΔZ от оси C",
+      "measured": -6.992203441176943,
+      "expected": null,
+      "tol": null,
+      "unit": "мм",
+      "status": "INFO",
+      "note": "ΔY=-6.99 (к лопатке <0), ΔZ=-23.49; конец ΔY=3.01"
+    },
+    {
+      "group": "Зуб",
+      "item": "Сверка с фото-оценкой ТЗ §12.3 (≈26 ниже C; 5–6 к лопатке; ± несколько мм)",
+      "method": "середина корня относительно C",
+      "measured": 26.09283869525167,
+      "expected": null,
+      "tol": null,
+      "unit": "мм",
+      "status": "INFO",
+      "note": "ниже C на 26.1; к лопатке на 7.9 — в пределах заявленной неопределённости фото"
+    },
+    {
+      "group": "Зуб",
+      "item": "Удерживающая ступенька",
+      "method": "параметр TOOTH_STEP_ENABLED",
+      "measured": false,
+      "expected": false,
+      "tol": null,
+      "unit": "мм",
+      "status": "NOT CONFIRMED",
+      "note": "форма/положение не измерены ('?'); механизм параметрический, по умолчанию выключен"
+    },
+    {
+      "group": "STEP",
+      "item": "Файл не пустой",
+      "method": "размер файла",
+      "measured": 822523,
+      "expected": null,
+      "tol": null,
+      "unit": "байт",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "STEP",
+      "item": "Обратный импорт: одно твёрдое тело",
+      "method": "import_step → solids()",
+      "measured": 1,
+      "expected": 1,
+      "tol": 0,
+      "unit": "шт",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "STEP",
+      "item": "Обратный импорт: валидность",
+      "method": "BRepCheck_Analyzer",
+      "measured": true,
+      "expected": true,
+      "tol": null,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "STEP",
+      "item": "Объём совпадает с построением",
+      "method": "|V_step − V_build| / V_build",
+      "measured": 3.429455782490732e-06,
+      "expected": 0.0,
+      "tol": 1e-05,
+      "unit": "отн.",
+      "status": "PASS",
+      "note": "V_step=11008.329 мм³"
+    },
+    {
+      "group": "STEP",
+      "item": "Габариты совпадают с построением",
+      "method": "max |Δ bbox|",
+      "measured": 9.99999993922529e-08,
+      "expected": 0.0,
+      "tol": 0.0001,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "STEP",
+      "item": "Единицы — миллиметры",
+      "method": "SI_UNIT(.MILLI.,.METRE.) в заголовке STEP",
+      "measured": true,
+      "expected": true,
+      "tol": null,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "STEP",
+      "item": "Схема STEP",
+      "method": "FILE_SCHEMA",
+      "measured": "AUTOMOTIVE_DESIGN { 1 0 10303 214 1 1 1 1 }",
+      "expected": null,
+      "tol": null,
+      "unit": "",
+      "status": "INFO",
+      "note": ""
+    },
+    {
+      "group": "STL",
+      "item": "Файл не пустой",
+      "method": "число треугольников",
+      "measured": 87364,
+      "expected": null,
+      "tol": null,
+      "unit": "шт",
+      "status": "PASS",
+      "note": "триангуляция: допуск 0.01 мм, угловой 0.1 рад"
+    },
+    {
+      "group": "STL",
+      "item": "Замкнутость (watertight)",
+      "method": "trimesh.is_watertight",
+      "measured": true,
+      "expected": true,
+      "tol": null,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "STL",
+      "item": "Граничные рёбра сетки (дыры)",
+      "method": "рёбра, принадлежащие одному треугольнику",
+      "measured": 0,
+      "expected": 0,
+      "tol": 0,
+      "unit": "шт",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "STL",
+      "item": "Неманифолдные рёбра сетки",
+      "method": "рёбра, принадлежащие >2 треугольникам",
+      "measured": 0,
+      "expected": 0,
+      "tol": 0,
+      "unit": "шт",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "STL",
+      "item": "Согласованная ориентация треугольников",
+      "method": "trimesh.is_winding_consistent",
+      "measured": true,
+      "expected": true,
+      "tol": null,
+      "unit": "мм",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "STL",
+      "item": "Нормали наружу (положительный объём)",
+      "method": "trimesh.volume > 0",
+      "measured": 11006.737883837885,
+      "expected": null,
+      "tol": null,
+      "unit": "мм³",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "STL",
+      "item": "Одно связное тело",
+      "method": "trimesh.split",
+      "measured": 1,
+      "expected": 1,
+      "tol": 0,
+      "unit": "шт",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "group": "STL",
+      "item": "Объём STL ≈ объём CAD",
+      "method": "|V_stl − V_cad| / V_cad",
+      "measured": 0.00014792800073394215,
+      "expected": 0.0,
+      "tol": 0.002,
+      "unit": "отн.",
+      "status": "PASS",
+      "note": "V_stl=11006.74 мм³"
+    },
+    {
+      "group": "STL",
+      "item": "Габариты STL ≈ CAD (единицы мм)",
+      "method": "max |Δ bbox|",
+      "measured": 0.0013597488403327418,
+      "expected": 0.0,
+      "tol": 0.02,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "X 69.999 × Y 44.867 × Z 33.498 мм"
+    },
+    {
+      "group": "STL",
+      "item": "Эйлерова характеристика",
+      "method": "V − E + F (2 − 2·род)",
+      "measured": -2,
+      "expected": null,
+      "tol": null,
+      "unit": "",
+      "status": "INFO",
+      "note": "ожидается −2: два сквозных отверстия (род 2)"
+    },
+    {
+      "group": "STL",
+      "item": "manifold3d: многообразная сетка",
+      "method": "Manifold(mesh).status() == NoError",
+      "measured": "Error.NoError",
+      "expected": null,
+      "tol": null,
+      "unit": "",
+      "status": "PASS",
+      "note": "род 2, объём 11006.74"
+    },
+    {
+      "group": "Варианты",
+      "item": "Перестроение: удерживающая ступенька включена (значения-заглушки)",
+      "method": "model.build({'TOOTH_STEP_ENABLED': True})",
+      "measured": true,
+      "expected": true,
+      "tol": null,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "V=10952.4 мм³; прямая грань за стенкой понижена на 0.800 (задано 0.8)"
+    },
+    {
+      "group": "Варианты",
+      "item": "Перестроение: прямая грань зуба снизу",
+      "method": "model.build({'TOOTH_FLAT_FACE': 'bottom'})",
+      "measured": true,
+      "expected": true,
+      "tol": null,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "V=10937.5 мм³"
+    },
+    {
+      "group": "Варианты",
+      "item": "Перестроение: контур фланца по исходной таблице §12.1 (S поднята до 2,5)",
+      "method": "model.build({'FLANGE_CONTOUR_SOURCE': 'spec', 'PADDLE_S_V': 2.5})",
+      "measured": true,
+      "expected": true,
+      "tol": null,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "V=10894.6 мм³"
+    },
+    {
+      "group": "Варианты",
+      "item": "Перестроение: γ = 3°",
+      "method": "model.build({'GAMMA_DEG': 3.0})",
+      "measured": true,
+      "expected": true,
+      "tol": null,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "V=11014.9 мм³"
+    },
+    {
+      "group": "Варианты",
+      "item": "Перестроение: центр C зафиксирован на 7,15 (как до исправления Ø)",
+      "method": "model.build({'LUG_HOLE_CENTER_Z_FIXED': 7.15})",
+      "measured": true,
+      "expected": true,
+      "tol": null,
+      "unit": "мм",
+      "status": "PASS",
+      "note": "V=10989.5 мм³; перемычка 2.600 (ожидается 2.600), Ø по лучу 3.100, центр Z=7.15"
+    }
+  ],
+  "variants": {
+    "удерживающая ступенька включена (значения-заглушки)": {
+      "ok": true,
+      "volume": 10952.390695169812,
+      "overrides": {
+        "TOOTH_STEP_ENABLED": true
+      }
+    },
+    "прямая грань зуба снизу": {
+      "ok": true,
+      "volume": 10937.502264203364,
+      "overrides": {
+        "TOOTH_FLAT_FACE": "bottom"
+      }
+    },
+    "контур фланца по исходной таблице §12.1 (S поднята до 2,5)": {
+      "ok": true,
+      "volume": 10894.559028585149,
+      "overrides": {
+        "FLANGE_CONTOUR_SOURCE": "spec",
+        "PADDLE_S_V": 2.5
+      }
+    },
+    "γ = 3°": {
+      "ok": true,
+      "volume": 11014.85873505908,
+      "overrides": {
+        "GAMMA_DEG": 3.0
+      }
+    },
+    "центр C зафиксирован на 7,15 (как до исправления Ø)": {
+      "ok": true,
+      "volume": 10989.46285673321,
+      "overrides": {
+        "LUG_HOLE_CENTER_Z_FIXED": 7.15
+      }
+    }
+  },
+  "volume_mm3": 11008.366329460348,
+  "bbox": {
+    "min": [
+      -34.99999989266211,
+      -37.61661335430525,
+      -22.200000000000003
+    ],
+    "max": [
+      34.99999999266211,
+      7.250000000000001,
+      11.3
+    ]
+  },
+  "environment": {
+    "python": "3.13.7",
+    "platform": "macOS-26.7.1-arm64-arm-64bit-Mach-O",
+    "build123d": "0.13.0",
+    "ocp": "8.0.1.1.0",
+    "trimesh": "4.7.0",
+    "manifold3d": "3.5.4",
+    "numpy": "2.5.4"
+  },
+  "seconds": 73.6
+}

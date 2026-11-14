@@ -1,6 +1,6 @@
-# Контроль целостности оригинальных входных файлов
+# Input SHA-256 checksums
 
-Оба файла сохранены побайтово, без редактирования и без переименования. SHA-256:
+- `input/cad-latch-spec.md` (original Russian specification): `16639eb333ce7da3cb17c0e53108751b8e13a31392efb1666b8e538bc34eb55a`
+- `input/cad-photo-atlas.pdf` (English edition supplied by the owner): `2da166d66fd484453dd131d62949d49e78a3da9dffdf473839794cafe3c26b40`
 
-- `input/cad-latch-spec(1).md`: `8c03a6e5a2556c7c5bf6e7d9dad775ba1b807aa70efa3cc38d307d4693f9186a`
-- `input/cad-photo-atlas(1).pdf`: `d48eca315b14d76af495d12138087aa730048ecc256cf6215117ad189ce6bf97`
+The preceding Russian atlas is available in Git history. Its original ten embedded photos are pixel-identical to the photos on pages 2–11 of the English edition.
